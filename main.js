@@ -1,5 +1,6 @@
-let handpose;
+let pose;
 let video;
+let myCanvas;
 let predictions = [];
 
 // variables to store finger coordinates
@@ -9,11 +10,15 @@ let pinkyFinger = [];
 let ringFinger = [];
 let thumb = [];
 let palm = [];
+let tipOfIndexFinger = [];
+let tipOfThumb = [];
 
 function setup() {
   createCanvas(640, 480);
   video = createCapture(VIDEO);
   video.size(width, height);
+
+  console.log(myCanvas);
 
   handpose = ml5.handpose(video, modelReady);
 
@@ -39,6 +44,14 @@ function setup() {
           thumb = results[0].annotations.thumb;
           palm = results[0].annotations.palmBase;
 
+          tipOfIndexFinger = results[0].annotations.indexFinger[3];
+          tipOfThumb = results[0].annotations.thumb[3];
+          // middleFinger = results[0].annotations.middleFinger;
+          // pinkyFinger = results[0].annotations.pinky;
+          // ringFinger = results[0].annotations.ringFinger;
+          // thumb = results[0].annotations.thumb;
+          // palm = results[0].annotations.palmBase;
+
           // output finger data for debugging
           console.log("Index finger: ", indexFinger);
           console.log("Middle finger: ", middleFinger);
@@ -46,6 +59,7 @@ function setup() {
           console.log("Ring finger: ", ringFinger);
           console.log("Thumb: ", thumb);
           console.log("Palm: ", palm);
+          console.log("Tip of index: ", tipOfIndexFinger);
         } else {
           console.log("No annotations");
         }
@@ -71,6 +85,7 @@ function draw() {
 
   // We can call both functions to draw all keypoints and the skeletons
   drawKeypoints();
+  // drawTipOfIndex();
 }
 
 // A function to draw ellipses over the detected keypoints
@@ -82,6 +97,43 @@ function drawKeypoints() {
       fill(0, 255, 0);
       noStroke();
       ellipse(keypoint[0], keypoint[1], 10, 10);
+      const circleOfIndex = tipOfIndexFinger;
+      fill(255, 0, 0);
+      noStroke();
+      ellipse(circleOfIndex[0], circleOfIndex[1], 10, 10);
+
+      const circleOfThumb = tipOfThumb;
+      fill(0, 0, 255);
+      noStroke();
+      ellipse(circleOfThumb[0], circleOfThumb[1], 10, 10);
+
+      let distance = dist(
+        tipOfIndexFinger[0],
+        tipOfIndexFinger[1],
+        tipOfThumb[0],
+        tipOfThumb[1]
+      );
+
+      console.log(distance);
+
+      if (distance < 120 && distance > 40) {
+        console.log("Close together");
+
+        fill(255, 255, 0);
+        noStroke();
+        ellipse(circleOfIndex[0], circleOfIndex[1], 10, 10);
+
+        fill(0, 255, 255);
+        noStroke();
+        ellipse(circleOfThumb[0], circleOfThumb[1], 10, 10);
+      }
     }
   }
 }
+
+// function drawTipOfIndex() {
+//   const circleOfIndex = tipOfIndexFinger;
+//   fill(255, 0, 0);
+//   noStroke();
+//   ellipse(circleOfIndex[0], circleOfIndex[1], 10, 10);
+// }
