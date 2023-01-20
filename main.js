@@ -12,6 +12,7 @@ let thumb = [];
 let palm = [];
 let tipOfIndexFinger = [];
 let tipOfThumb = [];
+let baseOfPinky = [];
 
 let signHint = document.getElementById("placeholder-sign");
 let hintBtn = document.getElementById("hintBtn");
@@ -70,6 +71,7 @@ function setup() {
 
           tipOfIndexFinger = results[0].annotations.indexFinger[3];
           tipOfThumb = results[0].annotations.thumb[3];
+          baseOfPinky = results[0].annotations.pinky[0];
           // middleFinger = results[0].annotations.middleFinger;
           // pinkyFinger = results[0].annotations.pinky;
           // ringFinger = results[0].annotations.ringFinger;
@@ -130,9 +132,6 @@ function drawKeypoints() {
     const prediction = predictions[i];
     for (let j = 0; j < prediction.landmarks.length; j += 1) {
       const keypoint = prediction.landmarks[j];
-      fill(0, 255, 0);
-      noStroke();
-      ellipse(keypoint[0], keypoint[1], 10, 10);
       const circleOfIndex = tipOfIndexFinger;
       fill(255, 0, 0);
       noStroke();
@@ -143,25 +142,37 @@ function drawKeypoints() {
       noStroke();
       ellipse(circleOfThumb[0], circleOfThumb[1], 10, 10);
 
+      const circleOfPinky = baseOfPinky;
+      fill(10, 190, 230);
+      noStroke();
+      ellipse(circleOfPinky[0], circleOfPinky[1], 10, 10);
+
+      // code for the ISL letter B
       let distance = dist(
-        tipOfIndexFinger[0],
-        tipOfIndexFinger[1],
+        baseOfPinky[0],
+        baseOfPinky[1],
         tipOfThumb[0],
         tipOfThumb[1]
       );
 
       console.log(distance);
 
-      if (distance < 120 && distance > 40) {
+      if (distance < 50) {
         console.log("Close together");
-
+        document.getElementById("placeholder-sign").classList.add("correct");
+        document
+          .getElementById("placeholder-sign")
+          .classList.remove("incorrect");
         fill(255, 255, 0);
         noStroke();
-        ellipse(circleOfIndex[0], circleOfIndex[1], 10, 10);
+        ellipse(baseOfPinky, baseOfPinky[1], 10, 10);
 
         fill(0, 255, 255);
         noStroke();
         ellipse(circleOfThumb[0], circleOfThumb[1], 10, 10);
+      } else {
+        document.getElementById("placeholder-sign").classList.add("incorrect");
+        document.getElementById("placeholder-sign").classList.add("correct");
       }
     }
   }
