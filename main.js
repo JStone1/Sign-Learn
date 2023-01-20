@@ -1,4 +1,4 @@
-let pose;
+let handpose;
 let video;
 let myCanvas;
 let predictions = [];
@@ -13,8 +13,32 @@ let palm = [];
 let tipOfIndexFinger = [];
 let tipOfThumb = [];
 
+let signHint = document.getElementById("placeholder-sign");
+let hintBtn = document.getElementById("hintBtn");
+
+let heart1 = document.getElementById("heart1");
+let heart2 = document.getElementById("heart2");
+let heart3 = document.getElementById("heart3");
+
+hintBtn.addEventListener("click", () => {
+  // signHint.classList.toggle("invisible");
+  console.log(testHTML.splashScreen);
+  document.getElementById("main-container").innerHTML = testHTML.splashScreen;
+});
+
+heart1.addEventListener("click", () => {
+  heart1.classList.toggle("invisible");
+});
+heart2.addEventListener("click", () => {
+  heart2.classList.toggle("invisible");
+});
+heart3.addEventListener("click", () => {
+  heart3.classList.toggle("invisible");
+});
+
 function setup() {
-  createCanvas(640, 480);
+  myCanvas = createCanvas(640, 480);
+  myCanvas.parent("canvas-container");
   video = createCapture(VIDEO);
   video.size(width, height);
 
@@ -75,6 +99,18 @@ function setup() {
   // Hide the video element, and just show the canvas
   video.hide();
 }
+
+document.addEventListener("visibilitychange", function () {
+  if (document.hidden) {
+    console.log("Browser tab is hidden");
+    video.pause();
+    document.title = "Video paused";
+  } else {
+    console.log("Browser tab is visible");
+    video.play();
+    document.title = "Video playing";
+  }
+});
 
 function modelReady() {
   console.log("Model ready!");

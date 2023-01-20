@@ -1,3 +1,82 @@
-canvas {
+/* * {
+  border: 1px solid red;
+} */
+
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.testTitle {
+  color: blue;
+  font-size: 3em;
+}
+
+#main-container {
+  display: flex;
+  justify-content: space-around;
+  width: 80%;
+}
+
+#instruction-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.placeholder-canvas {
+  width: 50%;
+  height: 480px;
+  background-color: rgb(146, 206, 234);
+}
+
+#sign-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.current-sign-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+#placeholder-sign {
+  width: 50px;
+  height: 50px;
   background-color: lightblue;
+}
+
+.invisible {
+  opacity: 0;
+}
+
+#stats-container {
+  display: flex;
+  width: 40%;
+  justify-content: space-between;
+}
+
+.lives {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.heart {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background-color: red;
+  margin: 5px;
+}
+
+button {
+  width: 150px;
+  height: 150px;
 }
