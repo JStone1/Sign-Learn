@@ -21,10 +21,26 @@ let heart1 = document.getElementById("heart1");
 let heart2 = document.getElementById("heart2");
 let heart3 = document.getElementById("heart3");
 
-hintBtn.addEventListener("click", () => {
+let isReady = false;
+
+let splashBtn = document.getElementById("splashBtn");
+let mainBtn = document.getElementById("mainBtn");
+console.log(isReady);
+
+splashBtn.addEventListener("click", () => {
   // signHint.classList.toggle("invisible");
   console.log(testHTML.splashScreen);
   document.getElementById("main-container").innerHTML = testHTML.splashScreen;
+  myCanvas.hide();
+});
+
+mainBtn.addEventListener("click", () => {
+  // signHint.classList.toggle("invisible");
+  if (isReady) {
+    document.getElementById("main-container").innerHTML = testHTML.mainScreen;
+    myCanvas.parent("canvas-container");
+    myCanvas.show();
+  }
 });
 
 heart1.addEventListener("click", () => {
@@ -39,7 +55,7 @@ heart3.addEventListener("click", () => {
 
 function setup() {
   myCanvas = createCanvas(640, 480);
-  myCanvas.parent("canvas-container");
+
   video = createCapture(VIDEO);
   video.size(width, height);
 
@@ -52,14 +68,14 @@ function setup() {
   handpose.on("predict", (results) => {
     predictions = results;
     if (results) {
-      console.log("Got results");
+      // console.log("Got results");
       //   console.log(results);
       if (results[0]) {
-        console.log("Got first object in results array");
+        // console.log("Got first object in results array");
         // console.log(results[0]);
         if (results[0].annotations) {
-          console.log("Got annotations");
-          console.log(results[0].annotations);
+          // console.log("Got annotations");
+          // console.log(results[0].annotations);
 
           // assign finger coordinates data to variables
           indexFinger = results[0].annotations.indexFinger;
@@ -79,27 +95,28 @@ function setup() {
           // palm = results[0].annotations.palmBase;
 
           // output finger data for debugging
-          console.log("Index finger: ", indexFinger);
-          console.log("Middle finger: ", middleFinger);
-          console.log("Pinky finger: ", pinkyFinger);
-          console.log("Ring finger: ", ringFinger);
-          console.log("Thumb: ", thumb);
-          console.log("Palm: ", palm);
-          console.log("Tip of index: ", tipOfIndexFinger);
+          // console.log("Index finger: ", indexFinger);
+          // console.log("Middle finger: ", middleFinger);
+          // console.log("Pinky finger: ", pinkyFinger);
+          // console.log("Ring finger: ", ringFinger);
+          // console.log("Thumb: ", thumb);
+          // console.log("Palm: ", palm);
+          // console.log("Tip of index: ", tipOfIndexFinger);
         } else {
-          console.log("No annotations");
+          // console.log("No annotations");
         }
       } else {
-        console.log("No first object in results array");
+        // console.log("No first object in results array");
       }
     } else {
-      console.log("No results");
+      // console.log("No results");
     }
     // console.log(results[0]);
   });
 
   // Hide the video element, and just show the canvas
   video.hide();
+  myCanvas.hide();
 }
 
 document.addEventListener("visibilitychange", function () {
@@ -115,7 +132,9 @@ document.addEventListener("visibilitychange", function () {
 });
 
 function modelReady() {
+  isReady = true;
   console.log("Model ready!");
+  console.log(isReady);
 }
 
 function draw() {
@@ -132,6 +151,9 @@ function drawKeypoints() {
     const prediction = predictions[i];
     for (let j = 0; j < prediction.landmarks.length; j += 1) {
       const keypoint = prediction.landmarks[j];
+      // fill(0, 255, 0);
+      // noStroke();
+      // ellipse(keypoint[0], keypoint[1], 10, 10);
       const circleOfIndex = tipOfIndexFinger;
       fill(255, 0, 0);
       noStroke();
@@ -156,7 +178,6 @@ function drawKeypoints() {
       );
 
       console.log(distance);
-
       if (distance < 50) {
         console.log("Close together");
         document.getElementById("placeholder-sign").classList.add("correct");
@@ -172,7 +193,6 @@ function drawKeypoints() {
         ellipse(circleOfThumb[0], circleOfThumb[1], 10, 10);
       } else {
         document.getElementById("placeholder-sign").classList.add("incorrect");
-        document.getElementById("placeholder-sign").classList.add("correct");
       }
     }
   }
