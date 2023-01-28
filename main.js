@@ -54,10 +54,10 @@ heart3.addEventListener("click", () => {
 });
 
 function setup() {
-  // myCanvas = createCanvas(640, 480);
+  myCanvas = createCanvas(552, 480);
 
-  // video = createCapture(VIDEO);
-  // video.size(width, height);
+  video = createCapture(VIDEO);
+  video.size(width, height);
 
   console.log(myCanvas);
 

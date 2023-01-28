@@ -107,6 +107,25 @@ button {
 }
 */
 
+.row {
+  margin: 100px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.row:last-child {
+  margin: 0px;
+}
+
+.icon {
+  width: 90px;
+}
+
+header {
+  background-color: lightblue;
+}
+
 .container {
   max-width: 1150px;
 }

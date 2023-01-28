@@ -13,7 +13,6 @@ let testHTML = {
 
   <div class="six columns">
     <div id="canvas-container" style="background-color: grey">
-      <div style="width: 640px; height: 480px"></div>
     </div>
   </div>
 
@@ -28,7 +27,7 @@ let testHTML = {
   </div>
 </div>
 
-<div class="row" style="margin-top: 20px; border: 1px solid black">
+<div class="row" style="border: 1px solid black">
   <div class="two columns" style="text-align: center">
     <div><p>.</p></div>
   </div>
@@ -48,56 +47,39 @@ let testHTML = {
 
   splashScreen: `
   <div class="row" style="background-color: lightblue">
-    <div class="ten columns">
-      <h2>What is it?</h2>
-      <p>
-        This is a learning tool developed to help people practice sign
-        language.
-      </p>
-    </div>
-    <div class="two columns">
-      <div
-        class="img"
-        style="background-color: lightcoral; width: 50px; height: 50px"
-      >
-        Img
-      </div>
-    </div>
+  <div class="ten columns">
+    <h2>What is it?</h2>
+    <p>
+      This is a learning tool developed to help people practice sign
+      language.
+    </p>
   </div>
+  <div class="two columns">
+    <img class="icon" src="/images/online-learning.png" />
+  </div>
+</div>
 
-  <div class="row" style="background-color: lightgreen">
-    <div class="ten columns">
-      <h2>How to use it?</h2>
-      <p>
-        User's will be shown a letter of the ISL alphabet and have to
-        replicate the sign using their webcam.
-      </p>
-    </div>
-    <div class="two columns">
-      <div
-        class="img"
-        style="background-color: lightcoral; width: 50px; height: 50px"
-      >
-        Img
-      </div>
-    </div>
+<div class="row" style="background-color: lightgreen">
+  <div class="ten columns">
+    <h2>How to use it?</h2>
+    <p>
+      User's will be shown a letter of the ISL alphabet and have to
+      replicate the sign using their webcam.
+    </p>
   </div>
+  <div class="two columns">
+    <img class="icon" src="/images/hello.png" />
+  </div>
+</div>
 
-  <div class="row" style="background-color: lightyellow">
-    <div class="ten columns">
-      <h2>The aim:</h2>
-      <p>Get as many correct letters as you can within the time limit!</p>
-    </div>
-    <div class="two columns">
-      <div
-        class="img"
-        style="background-color: lightcoral; width: 50px; height: 50px"
-      >
-        Img
-      </div>
-    </div>
+<div class="row" style="background-color: lightyellow">
+  <div class="ten columns">
+    <h2>The aim:</h2>
+    <p>Get as many correct letters as you can within the time limit!</p>
   </div>
-  <section>
-    <div class="splashScreen"></div>
-  </section>`,
+  <div class="two columns">
+    <img class="icon" src="/images/web-camera.png" />
+  </div>
+</div>
+`,
 };
