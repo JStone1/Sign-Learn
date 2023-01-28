@@ -1,43 +1,103 @@
 let testHTML = {
-  mainScreen: `<div id="secondary-container">
-  <section id="instruction-section">
-    <h2>How to</h2>
-    <ul>
-      <li>Point 1</li>
-      <li>Point 2</li>
-      <li>Point 3</li>
-    </ul>
-  </section>
-  <div id="canvas-container"></div>
-  <!-- <div class="placeholder-canvas">Placeholder</div> -->
-  <section id="sign-section">
-    <h2>Current sign</h2>
-    <div class="current-sign-info">
-      <div id="placeholder-sign"></div>
-      <p>Letter B</p>
-    </div>
-    <button id="hintBtn">Show hint</button>
-  </section>
-</div>
-<section id="stats-container">
-  <div class="lives">
-    <div id="heart1" class="heart"></div>
-    <div id="heart2" class="heart"></div>
-    <div id="heart3" class="heart"></div>
+  mainScreen: ` <div class="row">
+  <div class="three columns" style="background-color: antiquewhite">
+    <section id="instruction-section" class="info-section">
+      <h3>How to</h3>
+      <ul>
+        <li>Point 1</li>
+        <li>Point 2</li>
+        <li>Point 3</li>
+      </ul>
+    </section>
   </div>
-  <p>Score: 3</p>
-  <p>Time: 0:25</p>
-</section>`,
 
-  splashScreen: `           <section>
-  <div class="splashScreen">
-    <h1>This is my splash screen</h1>
-    <p>
-      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro,
-      obcaecati iste. Dolorum numquam ipsum deleniti itaque qui nostrum
-      dignissimos omnis culpa natus fugiat ex molestiae, voluptas pariatur
-      unde aliquid eligendi.
-    </p>
+  <div class="six columns">
+    <div id="canvas-container" style="background-color: grey">
+      <div style="width: 640px; height: 480px"></div>
+    </div>
   </div>
-</section>`,
+
+  <div class="three columns" style="background-color: antiquewhite">
+    <section id="sign-section" class="info-section">
+      <h3>Current sign</h3>
+      <div class="current-sign-info">
+        <div id="placeholder-sign"></div>
+        <p>Letter B</p>
+      </div>
+    </section>
+  </div>
+</div>
+
+<div class="row" style="margin-top: 20px; border: 1px solid black">
+  <div class="two columns" style="text-align: center">
+    <div><p>.</p></div>
+  </div>
+  <div class="four columns" style="text-align: center">
+    <p><strong>Score:</strong> 3</p>
+  </div>
+
+  <div class="four columns" style="text-align: center">
+    <p><strong>Time:</strong> 0:25</p>
+  </div>
+  <div class="two columns" style="text-align: center">
+    <div><p>.</p></div>
+  </div>
+</div>
+
+`,
+
+  splashScreen: `
+  <div class="row" style="background-color: lightblue">
+    <div class="ten columns">
+      <h2>What is it?</h2>
+      <p>
+        This is a learning tool developed to help people practice sign
+        language.
+      </p>
+    </div>
+    <div class="two columns">
+      <div
+        class="img"
+        style="background-color: lightcoral; width: 50px; height: 50px"
+      >
+        Img
+      </div>
+    </div>
+  </div>
+
+  <div class="row" style="background-color: lightgreen">
+    <div class="ten columns">
+      <h2>How to use it?</h2>
+      <p>
+        User's will be shown a letter of the ISL alphabet and have to
+        replicate the sign using their webcam.
+      </p>
+    </div>
+    <div class="two columns">
+      <div
+        class="img"
+        style="background-color: lightcoral; width: 50px; height: 50px"
+      >
+        Img
+      </div>
+    </div>
+  </div>
+
+  <div class="row" style="background-color: lightyellow">
+    <div class="ten columns">
+      <h2>The aim:</h2>
+      <p>Get as many correct letters as you can within the time limit!</p>
+    </div>
+    <div class="two columns">
+      <div
+        class="img"
+        style="background-color: lightcoral; width: 50px; height: 50px"
+      >
+        Img
+      </div>
+    </div>
+  </div>
+  <section>
+    <div class="splashScreen"></div>
+  </section>`,
 };

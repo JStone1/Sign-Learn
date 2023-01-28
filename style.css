@@ -1,6 +1,4 @@
-/* * {
-  border: 1px solid red;
-} */
+/* 
 
 body {
   margin: 0;
@@ -71,7 +69,6 @@ body {
   width: 50px;
   height: 50px;
   margin-right: 20px;
-  /* background-color: lightblue; */
 }
 
 .correct {
@@ -92,10 +89,13 @@ body {
   justify-content: space-between;
 }
 
+
+button {
+  cursor: pointer;
+} 
+
 .lives {
   display: flex;
-  justify-content: space-around;
-  align-items: center;
 }
 
 .heart {
@@ -105,7 +105,20 @@ body {
   background-color: red;
   margin: 5px;
 }
+*/
 
-button {
-  cursor: pointer;
+.container {
+  max-width: 1150px;
+}
+
+header {
+  text-align: center;
+}
+
+section {
+  border: solid 1px black;
+}
+
+.info-section {
+  height: 480px;
 }
