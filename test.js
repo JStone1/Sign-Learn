@@ -1,5 +1,5 @@
 let testHTML = {
-  mainScreen: ` <div class="row">
+  mainScreen: `                  <div class="row">
   <div class="three columns" style="background-color: antiquewhite">
     <section id="instruction-section" class="info-section">
       <h3>How to</h3>
@@ -12,8 +12,7 @@ let testHTML = {
   </div>
 
   <div class="six columns">
-    <div id="canvas-container" style="background-color: grey">
-    </div>
+    <div id="canvas-container" style="background-color: grey"></div>
   </div>
 
   <div class="three columns" style="background-color: antiquewhite">
@@ -32,18 +31,18 @@ let testHTML = {
     <div><p>.</p></div>
   </div>
   <div class="four columns" style="text-align: center">
-    <p><strong>Score:</strong> 3</p>
+    <p><strong>Score:</strong></p>
+    <p id="score">0</p>
   </div>
 
   <div class="four columns" style="text-align: center">
-    <p><strong>Time:</strong> 0:25</p>
+    <p><strong>Time:</strong></p>
+    <p id="time">0</p>
   </div>
   <div class="two columns" style="text-align: center">
     <div><p>.</p></div>
   </div>
-</div>
-
-`,
+</div>`,
 
   splashScreen: `
   <div class="row" style="background-color: lightblue">

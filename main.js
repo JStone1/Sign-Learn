@@ -2,6 +2,7 @@ let handpose;
 let video;
 let myCanvas;
 let predictions = [];
+let isReady = false;
 
 // variables to store finger coordinates
 let indexFinger = [];
@@ -14,43 +15,45 @@ let tipOfIndexFinger = [];
 let tipOfThumb = [];
 let baseOfPinky = [];
 
-let signHint = document.getElementById("placeholder-sign");
-let hintBtn = document.getElementById("hintBtn");
-
-let heart1 = document.getElementById("heart1");
-let heart2 = document.getElementById("heart2");
-let heart3 = document.getElementById("heart3");
-
-let isReady = false;
-
+let startBtn = document.getElementById("startBtn");
+let stopBtn = document.getElementById("stopBtn");
 let splashBtn = document.getElementById("splashBtn");
 let mainBtn = document.getElementById("mainBtn");
-console.log(isReady);
+
+let time = 30;
+let timeInterval = setInterval(incrementTime, 1000);
+
+let myBool = true;
+
+function incrementTime() {
+  document.getElementById("time").innerHTML = time;
+  if (myBool) {
+    time -= 1;
+  }
+  console.log(time);
+}
+
+startBtn.addEventListener("click", () => {
+  console.log("time start");
+  myBool = true;
+  incrementTime();
+});
+
+stopBtn.addEventListener("click", () => {
+  myBool = false;
+});
 
 splashBtn.addEventListener("click", () => {
-  // signHint.classList.toggle("invisible");
-  console.log(testHTML.splashScreen);
   document.getElementById("main-container").innerHTML = testHTML.splashScreen;
   myCanvas.hide();
 });
 
 mainBtn.addEventListener("click", () => {
-  // signHint.classList.toggle("invisible");
   if (isReady) {
     document.getElementById("main-container").innerHTML = testHTML.mainScreen;
     myCanvas.parent("canvas-container");
     myCanvas.show();
   }
-});
-
-heart1.addEventListener("click", () => {
-  heart1.classList.toggle("invisible");
-});
-heart2.addEventListener("click", () => {
-  heart2.classList.toggle("invisible");
-});
-heart3.addEventListener("click", () => {
-  heart3.classList.toggle("invisible");
 });
 
 function setup() {
@@ -177,13 +180,8 @@ function drawKeypoints() {
         tipOfThumb[1]
       );
 
-      console.log(distance);
+      // console.log(distance);
       if (distance < 50) {
-        console.log("Close together");
-        document.getElementById("placeholder-sign").classList.add("correct");
-        document
-          .getElementById("placeholder-sign")
-          .classList.remove("incorrect");
         fill(255, 255, 0);
         noStroke();
         ellipse(baseOfPinky, baseOfPinky[1], 10, 10);
@@ -191,8 +189,6 @@ function drawKeypoints() {
         fill(0, 255, 255);
         noStroke();
         ellipse(circleOfThumb[0], circleOfThumb[1], 10, 10);
-      } else {
-        document.getElementById("placeholder-sign").classList.add("incorrect");
       }
     }
   }
