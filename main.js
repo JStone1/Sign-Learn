@@ -21,21 +21,25 @@ let splashBtn = document.getElementById("splashBtn");
 let mainBtn = document.getElementById("mainBtn");
 
 let time = 30;
+let startTime = true;
+
 let timeInterval = setInterval(incrementTime, 1000);
 
-let myBool = true;
-
 function incrementTime() {
-  document.getElementById("time").innerHTML = time;
-  if (myBool) {
+  if (startTime) {
     time -= 1;
   }
   console.log(time);
+  document.getElementById("time").innerHTML = time;
+
+  if (time == 0) {
+    clearInterval(timeInterval);
+    console.log("Times up");
+  }
 }
 
 startBtn.addEventListener("click", () => {
-  console.log("time start");
-  myBool = true;
+  startTime = true;
   incrementTime();
 });
 
@@ -180,8 +184,19 @@ function drawKeypoints() {
         tipOfThumb[1]
       );
 
+      let signTime = 0;
+
+      function checkSign() {
+        signTime++;
+        if (signTime == 3) {
+          document.getElementById("score").innerHTML = "correct";
+          signTime = 0;
+        }
+      }
+
       // console.log(distance);
       if (distance < 50) {
+        setInterval(checkSign, 1000);
         fill(255, 255, 0);
         noStroke();
         ellipse(baseOfPinky, baseOfPinky[1], 10, 10);
@@ -189,6 +204,8 @@ function drawKeypoints() {
         fill(0, 255, 255);
         noStroke();
         ellipse(circleOfThumb[0], circleOfThumb[1], 10, 10);
+      } else {
+        signTime = 0;
       }
     }
   }
