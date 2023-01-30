@@ -65,11 +65,7 @@ body {
   font-size: 2em;
 }
 
-#placeholder-sign {
-  width: 50px;
-  height: 50px;
-  margin-right: 20px;
-}
+
 
 .correct {
   background-color: green;
@@ -108,7 +104,8 @@ button {
 */
 
 .row {
-  margin: 100px 0px;
+  margin: 75px 0px;
+  padding: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -123,6 +120,7 @@ button {
 }
 
 header {
+  border: 1px solid black;
   background-color: lightblue;
 }
 
@@ -135,7 +133,27 @@ header {
 }
 
 section {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
   border: solid 1px black;
+}
+
+ul {
+  width: 60%;
+  height: 60%;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  margin: 50px 0px;
+}
+
+#sign-img {
+  width: 60%;
+  height: 60%;
 }
 
 .info-section {

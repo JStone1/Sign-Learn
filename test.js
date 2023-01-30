@@ -1,5 +1,5 @@
 let testHTML = {
-  mainScreen: `                  <div class="row">
+  mainScreen: `                        <div class="row">
   <div class="three columns" style="background-color: antiquewhite">
     <section id="instruction-section" class="info-section">
       <h3>How to</h3>
@@ -8,6 +8,7 @@ let testHTML = {
         <li>Point 2</li>
         <li>Point 3</li>
       </ul>
+      <button class="button-primary" id="startBtn">Start</button>
     </section>
   </div>
 
@@ -18,10 +19,9 @@ let testHTML = {
   <div class="three columns" style="background-color: antiquewhite">
     <section id="sign-section" class="info-section">
       <h3>Current sign</h3>
-      <div class="current-sign-info">
-        <div id="placeholder-sign"></div>
-        <p>Letter B</p>
-      </div>
+      <!-- <p>Letter B</p> -->
+      <img id="sign-img" src="/images/Letter B.png" />
+      <button class="button-primary" id="stopBtn">Hide Hint</button>
     </section>
   </div>
 </div>
@@ -73,8 +73,11 @@ let testHTML = {
 
 <div class="row" style="background-color: lightyellow">
   <div class="ten columns">
-    <h2>The aim:</h2>
-    <p>Get as many correct letters as you can within the time limit!</p>
+    <h2>Ready?</h2>
+    <p>
+      Press the button below to go to the next screen - warning you will
+      see your face!
+    </p>
   </div>
   <div class="two columns">
     <img class="icon" src="/images/web-camera.png" />
