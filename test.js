@@ -1,5 +1,5 @@
 let testHTML = {
-  mainScreen: `                        <div class="row">
+  mainScreen: `      <div class="row">
   <div class="three columns" style="background-color: antiquewhite">
     <section id="instruction-section" class="info-section">
       <h3>How to</h3>
@@ -21,7 +21,7 @@ let testHTML = {
       <h3>Current sign</h3>
       <!-- <p>Letter B</p> -->
       <img id="sign-img" src="/images/Letter B.png" />
-      <button class="button-primary" id="stopBtn">Hide Hint</button>
+      <button class="button-primary" id="hintBtn">Hide Hint</button>
     </section>
   </div>
 </div>

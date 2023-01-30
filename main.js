@@ -33,29 +33,51 @@ function incrementTime() {
   }
 }
 
-let startBtn = document.getElementById("startBtn");
-let stopBtn = document.getElementById("stopBtn");
+let startTimeBtn = document.getElementById("startBtn");
+let stopTimeBtn = document.getElementById("stopBtn");
 let splashBtn = document.getElementById("splashBtn");
 let mainBtn = document.getElementById("mainBtn");
+let startBtn = document.getElementById("startBtn");
 let hintBtn = document.getElementById("hintBtn");
 
-startBtn.addEventListener("click", () => {
+startTimeBtn.addEventListener("click", () => {
   startTime = true;
   incrementTime();
 });
 
-stopBtn.addEventListener("click", () => {
+stopTimeBtn.addEventListener("click", () => {
   myBool = false;
 });
 
 splashBtn.addEventListener("click", () => {
   document.getElementById("main-container").innerHTML = testHTML.splashScreen;
-  myCanvas.hide();
+  // myCanvas.hide();
 });
 
 mainBtn.addEventListener("click", () => {
+  document.getElementById("main-container").innerHTML = testHTML.mainScreen; // replace the page content with new html
+  // reinitialise the button element and re add the event listner
+  let newHintBtn = document.getElementById("hintBtn");
+  newHintBtn.addEventListener("click", () => {
+    document.getElementById("sign-img").classList.toggle("hidden");
+    if (newHintBtn.innerHTML === "Hide Hint") {
+      newHintBtn.innerHTML = "Show Hint";
+    } else {
+      newHintBtn.innerHTML = "Hide Hint";
+    }
+  });
+  let newStartBtn = document.getElementById("startBtn");
+
+  newStartBtn.addEventListener("click", () => {
+    if (isReady) {
+      myCanvas.parent("canvas-container");
+      myCanvas.show();
+    }
+  });
+});
+
+startBtn.addEventListener("click", () => {
   if (isReady) {
-    document.getElementById("main-container").innerHTML = testHTML.mainScreen;
     myCanvas.parent("canvas-container");
     myCanvas.show();
   }
