@@ -15,11 +15,6 @@ let tipOfIndexFinger = [];
 let tipOfThumb = [];
 let baseOfPinky = [];
 
-let startBtn = document.getElementById("startBtn");
-let stopBtn = document.getElementById("stopBtn");
-let splashBtn = document.getElementById("splashBtn");
-let mainBtn = document.getElementById("mainBtn");
-
 let time = 30;
 let startTime = true;
 
@@ -37,6 +32,12 @@ function incrementTime() {
     console.log("Times up");
   }
 }
+
+let startBtn = document.getElementById("startBtn");
+let stopBtn = document.getElementById("stopBtn");
+let splashBtn = document.getElementById("splashBtn");
+let mainBtn = document.getElementById("mainBtn");
+let hintBtn = document.getElementById("hintBtn");
 
 startBtn.addEventListener("click", () => {
   startTime = true;
@@ -57,6 +58,15 @@ mainBtn.addEventListener("click", () => {
     document.getElementById("main-container").innerHTML = testHTML.mainScreen;
     myCanvas.parent("canvas-container");
     myCanvas.show();
+  }
+});
+
+hintBtn.addEventListener("click", () => {
+  document.getElementById("sign-img").classList.toggle("hidden");
+  if (hintBtn.innerHTML === "Hide Hint") {
+    hintBtn.innerHTML = "Show Hint";
+  } else {
+    hintBtn.innerHTML = "Hide Hint";
   }
 });
 

@@ -159,3 +159,7 @@ li {
 .info-section {
   height: 480px;
 }
+
+.hidden {
+  opacity: 0;
+}
