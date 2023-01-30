@@ -16,7 +16,8 @@ let tipOfThumb = [];
 let baseOfPinky = [];
 
 let time = 30;
-let startTime = true;
+let score = 0;
+let startTime = false;
 
 let timeInterval = setInterval(incrementTime, 1000);
 
@@ -24,7 +25,7 @@ function incrementTime() {
   if (startTime) {
     time -= 1;
   }
-  console.log(time);
+  // console.log(time);
   document.getElementById("time").innerHTML = time;
 
   if (time == 0) {
@@ -51,6 +52,10 @@ stopTimeBtn.addEventListener("click", () => {
 
 splashBtn.addEventListener("click", () => {
   document.getElementById("main-container").innerHTML = testHTML.splashScreen;
+  startTime = false;
+  time = 30;
+  score = 0;
+
   // myCanvas.hide();
 });
 
@@ -66,20 +71,24 @@ mainBtn.addEventListener("click", () => {
       newHintBtn.innerHTML = "Hide Hint";
     }
   });
-  let newStartBtn = document.getElementById("startBtn");
 
+  let newStartBtn = document.getElementById("startBtn");
   newStartBtn.addEventListener("click", () => {
     if (isReady) {
       myCanvas.parent("canvas-container");
       myCanvas.show();
+      document.getElementById("sign-section").classList.remove("hidden");
+      startTime = true;
     }
   });
+  document.getElementById("sign-section").classList.add("hidden");
 });
 
 startBtn.addEventListener("click", () => {
   if (isReady) {
     myCanvas.parent("canvas-container");
     myCanvas.show();
+    document.getElementById("sign-section").classList.remove("hidden");
   }
 });
 
@@ -184,6 +193,8 @@ function draw() {
   // drawTipOfIndex();
 }
 
+let signNumber = 1;
+
 // A function to draw ellipses over the detected keypoints
 function drawKeypoints() {
   for (let i = 0; i < predictions.length; i += 1) {
@@ -193,18 +204,14 @@ function drawKeypoints() {
       // fill(0, 255, 0);
       // noStroke();
       // ellipse(keypoint[0], keypoint[1], 10, 10);
-      const circleOfIndex = tipOfIndexFinger;
-      fill(255, 0, 0);
-      noStroke();
-      ellipse(circleOfIndex[0], circleOfIndex[1], 10, 10);
 
       const circleOfThumb = tipOfThumb;
-      fill(0, 0, 255);
+      fill(255, 0, 0);
       noStroke();
       ellipse(circleOfThumb[0], circleOfThumb[1], 10, 10);
 
       const circleOfPinky = baseOfPinky;
-      fill(10, 190, 230);
+      fill(255, 0, 0);
       noStroke();
       ellipse(circleOfPinky[0], circleOfPinky[1], 10, 10);
 
@@ -216,30 +223,67 @@ function drawKeypoints() {
         tipOfThumb[1]
       );
 
-      let signTime = 0;
+      document.getElementById("score").innerHTML = score;
 
-      function checkSign() {
-        signTime++;
-        if (signTime == 3) {
-          document.getElementById("score").innerHTML = "correct";
-          signTime = 0;
-        }
-      }
+      switch (signNumber) {
+        case 1:
+          // fill(255, 255, 0);
+          // noStroke();
+          // ellipse(baseOfPinky, baseOfPinky[1], 10, 10);
+          // fill(255, 255, 255);
+          // noStroke();
+          // ellipse(circleOfThumb[0], circleOfThumb[1], 10, 10);
+          if (distance < 50) {
+            fill(0, 255, 0);
+            noStroke();
+            ellipse(circleOfPinky[0], circleOfPinky[1], 10, 10);
+            fill(0, 255, 0);
+            noStroke();
+            ellipse(circleOfThumb[0], circleOfThumb[1], 10, 10);
+            setTimeout(letterB, 3000);
+          }
 
-      // console.log(distance);
-      if (distance < 50) {
-        setInterval(checkSign, 1000);
-        fill(255, 255, 0);
-        noStroke();
-        ellipse(baseOfPinky, baseOfPinky[1], 10, 10);
-
-        fill(0, 255, 255);
-        noStroke();
-        ellipse(circleOfThumb[0], circleOfThumb[1], 10, 10);
-      } else {
-        signTime = 0;
+          break;
+        case 2:
+          const circleOfIndex = tipOfIndexFinger;
+          fill(255, 0, 0);
+          noStroke();
+          ellipse(circleOfIndex[0], circleOfIndex[1], 10, 10);
+          fill(255, 110, 0);
+          noStroke();
+          ellipse(baseOfPinky, baseOfPinky[1], 10, 10);
+          fill(20, 255, 155);
+          noStroke();
+          ellipse(circleOfThumb[0], circleOfThumb[1], 10, 10);
+          if (distance > 50) {
+            setTimeout(letterQ, 3000);
+          }
+          break;
+        case 3:
+          console.log("Switch ended");
       }
     }
+  }
+}
+
+function letterB() {
+  if (signNumber == 1) {
+    console.log("B correct!");
+    signNumber++;
+    score++;
+    document.getElementById("sign-img").src = "/images/Letter Y.png";
+    document.getElementById("sign-img").style.width = "80%";
+    // document.getElementById("sign-img").style.height = "40%";
+    console.log("Sign number: ", signNumber);
+  }
+}
+
+function letterQ() {
+  if (signNumber == 2) {
+    console.log("F correct!");
+    signNumber++;
+    score++;
+    console.log("Sign number: ", signNumber);
   }
 }
 
