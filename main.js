@@ -107,7 +107,7 @@ hintBtn.addEventListener("click", () => {
 });
 
 function setup() {
-  myCanvas = createCanvas(552, 480);
+  myCanvas = createCanvas(640, 480);
 
   video = createCapture(VIDEO);
   video.size(width, height);
@@ -156,13 +156,13 @@ function setup() {
           // palm = results[0].annotations.palmBase;
 
           // output finger data for debugging
-          console.log("Index finger: ", indexFinger);
-          console.log("Middle finger: ", middleFinger);
-          console.log("Pinky finger: ", pinkyFinger);
-          console.log("Ring finger: ", ringFinger);
-          console.log("Thumb: ", thumb);
-          console.log("Palm: ", palm);
-          console.log("Tip of index: ", tipOfIndexFinger);
+          // console.log("Index finger: ", indexFinger);
+          // console.log("Middle finger: ", middleFinger);
+          // console.log("Pinky finger: ", pinkyFinger);
+          // console.log("Ring finger: ", ringFinger);
+          // console.log("Thumb: ", thumb);
+          // console.log("Palm: ", palm);
+          // console.log("Tip of index: ", tipOfIndexFinger);
         } else {
           // console.log("No annotations");
         }
@@ -206,25 +206,23 @@ function draw() {
   // drawTipOfIndex();
 }
 
-let signNumber = 2;
+let signNumber = 1;
 // A function to draw ellipses over the detected keypoints
 function drawKeypoints() {
   for (let i = 0; i < predictions.length; i += 1) {
     const prediction = predictions[i];
     for (let j = 0; j < prediction.landmarks.length; j += 1) {
       const keypoint = prediction.landmarks[j];
-      fill(0, 255, 0);
-      noStroke();
-      ellipse(keypoint[0], keypoint[1], 7, 7);
+      // fill(0, 255, 0);
+      // noStroke();
+      // ellipse(keypoint[0], keypoint[1], 7, 7);
     }
-
-    let distance;
 
     document.getElementById("score").innerHTML = score;
 
     switch (signNumber) {
       case 1:
-        distance = dist(
+        let distance = dist(
           baseOfPinky[0],
           baseOfPinky[1],
           tipOfThumb[0],
@@ -251,43 +249,80 @@ function drawKeypoints() {
 
         break;
       case 2:
-        // distance = dist(
-        //   baseOfPinky[0],
-        //   baseOfPinky[1],
-        //   tipOfThumb[0],
-        //   tipOfThumb[1]
-        // );
         const circleOfRing = tipOfRingFinger;
         fill(255, 0, 0);
         noStroke();
         ellipse(circleOfRing[0], circleOfRing[1], 7, 7);
-
-        const circleOfMiddle = tipOfMiddleFinger;
-        fill(255, 0, 0);
-        noStroke();
-        ellipse(circleOfMiddle[0], circleOfMiddle[1], 7, 7);
-
-        const circleOfIndex = tipOfIndexFinger;
-        fill(255, 0, 0);
-        noStroke();
-        ellipse(circleOfIndex[0], circleOfIndex[1], 7, 7);
 
         const circleBaseOfRing = baseOfRing;
         fill(0, 0, 255);
         noStroke();
         ellipse(circleBaseOfRing[0], circleBaseOfRing[1], 7, 7);
 
+        const circleOfMiddle = tipOfMiddleFinger;
+        fill(255, 0, 0);
+        noStroke();
+        ellipse(circleOfMiddle[0], circleOfMiddle[1], 7, 7);
+
         const circleBaseOfMiddle = baseOfMiddle;
         fill(0, 0, 255);
         noStroke();
         ellipse(circleBaseOfMiddle[0], circleBaseOfMiddle[1], 7, 7);
 
+        const circleOfIndex = tipOfIndexFinger;
+        fill(255, 0, 0);
+        noStroke();
+        ellipse(circleOfIndex[0], circleOfIndex[1], 7, 7);
+
         const circleBaseOfIndex = baseOfIndex;
         fill(0, 0, 255);
         noStroke();
         ellipse(circleBaseOfIndex[0], circleBaseOfIndex[1], 7, 7);
-        if (distance > 50) {
-          // setTimeout(letterQ, 3000);
+
+        let ringDistance = dist(
+          baseOfRing[0],
+          baseOfRing[1],
+          tipOfRingFinger[0],
+          tipOfRingFinger[1]
+        );
+        let middleDistance = dist(
+          baseOfMiddle[0],
+          baseOfMiddle[1],
+          tipOfMiddleFinger[0],
+          tipOfMiddleFinger[1]
+        );
+        let indexDistance = dist(
+          baseOfIndex[0],
+          baseOfIndex[1],
+          tipOfIndexFinger[0],
+          tipOfIndexFinger[1]
+        );
+
+        // console.log("Ring distance: ", ringDistance);
+        // console.log("Middle distance: ", middleDistance);
+        // console.log("Index distance: ", indexDistance);
+
+        console.log("Tip of middle(0): ", tipOfMiddleFinger[0]); // 0 is x
+        console.log("Tip of middle(1): ", tipOfMiddleFinger[1]); // 1 is y
+        console.log("Base of middle(0): ", baseOfMiddle[0]);
+        console.log("Base of middle(1): ", baseOfMiddle[1]);
+
+        if (
+          ringDistance > 65 &&
+          middleDistance > 65 &&
+          indexDistance > 55 &&
+          tipOfMiddleFinger[1] > baseOfMiddle[1]
+        ) {
+          fill(0, 255, 0);
+          noStroke();
+          ellipse(circleOfRing[0], circleOfRing[1], 7, 7);
+          fill(0, 255, 0);
+          noStroke();
+          ellipse(circleOfMiddle[0], circleOfMiddle[1], 7, 7);
+          fill(0, 255, 0);
+          noStroke();
+          ellipse(circleOfIndex[0], circleOfIndex[1], 7, 7);
+          setTimeout(letterY, 3000);
         }
         break;
       case 3:
@@ -308,7 +343,7 @@ function letterB() {
   }
 }
 
-function letterQ() {
+function letterY() {
   if (signNumber == 2) {
     console.log("F correct!");
     signNumber++;
