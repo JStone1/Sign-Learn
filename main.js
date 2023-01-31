@@ -40,7 +40,6 @@ function incrementTime() {
 }
 
 let startTimeBtn = document.getElementById("startBtn");
-let stopTimeBtn = document.getElementById("stopBtn");
 let splashBtn = document.getElementById("splashBtn");
 let mainBtn = document.getElementById("mainBtn");
 let startBtn = document.getElementById("startBtn");
@@ -49,10 +48,6 @@ let hintBtn = document.getElementById("hintBtn");
 startTimeBtn.addEventListener("click", () => {
   startTime = true;
   incrementTime();
-});
-
-stopTimeBtn.addEventListener("click", () => {
-  myBool = false;
 });
 
 splashBtn.addEventListener("click", () => {
