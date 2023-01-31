@@ -219,6 +219,14 @@ function drawKeypoints() {
     }
 
     document.getElementById("score").innerHTML = score;
+    const circleOfThumb = tipOfThumb;
+    const circleOfPinky = baseOfPinky;
+    const circleOfRing = tipOfRingFinger;
+    const circleBaseOfRing = baseOfRing;
+    const circleOfMiddle = tipOfMiddleFinger;
+    const circleBaseOfMiddle = baseOfMiddle;
+    const circleOfIndex = tipOfIndexFinger;
+    const circleBaseOfIndex = baseOfIndex;
 
     switch (signNumber) {
       case 1:
@@ -228,12 +236,10 @@ function drawKeypoints() {
           tipOfThumb[0],
           tipOfThumb[1]
         );
-        const circleOfThumb = tipOfThumb;
         fill(255, 0, 0);
         noStroke();
         ellipse(circleOfThumb[0], circleOfThumb[1], 7, 7);
 
-        const circleOfPinky = baseOfPinky;
         fill(255, 0, 0);
         noStroke();
         ellipse(circleOfPinky[0], circleOfPinky[1], 7, 7);
@@ -249,32 +255,26 @@ function drawKeypoints() {
 
         break;
       case 2:
-        const circleOfRing = tipOfRingFinger;
         fill(255, 0, 0);
         noStroke();
         ellipse(circleOfRing[0], circleOfRing[1], 7, 7);
 
-        const circleBaseOfRing = baseOfRing;
         fill(0, 0, 255);
         noStroke();
         ellipse(circleBaseOfRing[0], circleBaseOfRing[1], 7, 7);
 
-        const circleOfMiddle = tipOfMiddleFinger;
         fill(255, 0, 0);
         noStroke();
         ellipse(circleOfMiddle[0], circleOfMiddle[1], 7, 7);
 
-        const circleBaseOfMiddle = baseOfMiddle;
         fill(0, 0, 255);
         noStroke();
         ellipse(circleBaseOfMiddle[0], circleBaseOfMiddle[1], 7, 7);
 
-        const circleOfIndex = tipOfIndexFinger;
         fill(255, 0, 0);
         noStroke();
         ellipse(circleOfIndex[0], circleOfIndex[1], 7, 7);
 
-        const circleBaseOfIndex = baseOfIndex;
         fill(0, 0, 255);
         noStroke();
         ellipse(circleBaseOfIndex[0], circleBaseOfIndex[1], 7, 7);
@@ -298,15 +298,6 @@ function drawKeypoints() {
           tipOfIndexFinger[1]
         );
 
-        // console.log("Ring distance: ", ringDistance);
-        // console.log("Middle distance: ", middleDistance);
-        // console.log("Index distance: ", indexDistance);
-
-        console.log("Tip of middle(0): ", tipOfMiddleFinger[0]); // 0 is x
-        console.log("Tip of middle(1): ", tipOfMiddleFinger[1]); // 1 is y
-        console.log("Base of middle(0): ", baseOfMiddle[0]);
-        console.log("Base of middle(1): ", baseOfMiddle[1]);
-
         if (
           ringDistance > 50 &&
           middleDistance > 50 &&
@@ -326,7 +317,32 @@ function drawKeypoints() {
         }
         break;
       case 3:
-        console.log("Switch ended");
+        let thumbDistance = dist(
+          tipOfIndexFinger[0],
+          tipOfIndexFinger[1],
+          tipOfThumb[0],
+          tipOfThumb[1]
+        );
+        fill(255, 0, 0);
+        noStroke();
+        ellipse(circleOfThumb[0], circleOfThumb[1], 7, 7);
+
+        fill(255, 0, 0);
+        noStroke();
+        ellipse(circleOfIndex[0], circleOfIndex[1], 7, 7);
+        if (thumbDistance > 60 && thumbDistance < 80) {
+          fill(0, 255, 0);
+          noStroke();
+          ellipse(circleOfThumb[0], circleOfThumb[1], 7, 7);
+
+          fill(0, 255, 0);
+          noStroke();
+          ellipse(circleOfIndex[0], circleOfIndex[1], 7, 7);
+          setTimeout(letterC, 3000);
+        }
+        break;
+      case 4:
+        console.log("All signs complete - well done!");
     }
   }
 }
@@ -338,7 +354,6 @@ function letterB() {
     score++;
     document.getElementById("sign-img").src = "/images/Letter Y.png";
     document.getElementById("sign-img").style.width = "90%";
-    // document.getElementById("sign-img").style.height = "40%";
     console.log("Sign number: ", signNumber);
   }
 }
@@ -348,13 +363,17 @@ function letterY() {
     console.log("F correct!");
     signNumber++;
     score++;
+    document.getElementById("sign-img").src = "/images/Letter C.png";
+    document.getElementById("sign-img").style.width = "90%";
     console.log("Sign number: ", signNumber);
   }
 }
 
-// function drawTipOfIndex() {
-//   const circleOfIndex = tipOfIndexFinger;
-//   fill(255, 0, 0);
-//   noStroke();
-//   ellipse(circleOfIndex[0], circleOfIndex[1], 10, 10);
-// }
+function letterC() {
+  if (signNumber == 3) {
+    console.log("C correct!");
+    signNumber++;
+    score++;
+    console.log("Sign number: ", signNumber);
+  }
+}
