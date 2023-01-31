@@ -163,3 +163,12 @@ li {
 .hidden {
   opacity: 0;
 }
+
+canvas {
+  border: 1px solid black;
+}
+
+.stats {
+  text-align: center;
+  font-size: 2.5rem;
+}

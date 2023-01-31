@@ -308,9 +308,9 @@ function drawKeypoints() {
         console.log("Base of middle(1): ", baseOfMiddle[1]);
 
         if (
-          ringDistance > 65 &&
-          middleDistance > 65 &&
-          indexDistance > 55 &&
+          ringDistance > 50 &&
+          middleDistance > 50 &&
+          indexDistance > 45 &&
           tipOfMiddleFinger[1] > baseOfMiddle[1]
         ) {
           fill(0, 255, 0);
@@ -337,7 +337,7 @@ function letterB() {
     signNumber++;
     score++;
     document.getElementById("sign-img").src = "/images/Letter Y.png";
-    document.getElementById("sign-img").style.width = "80%";
+    document.getElementById("sign-img").style.width = "90%";
     // document.getElementById("sign-img").style.height = "40%";
     console.log("Sign number: ", signNumber);
   }
