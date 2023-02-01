@@ -120,9 +120,18 @@ button {
 }
 
 header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
   background-color: #022b3a;
   color: #fff;
   text-align: center;
+  height: 130px;
+}
+
+header h1 {
+  margin: 0;
 }
 
 .container {
@@ -179,6 +188,7 @@ canvas {
   font-size: 2.5rem;
 }
 
+/* Adjusting Skeleton CSS buttons to my own styles */
 .button.button-primary,
 button.button-primary,
 input[type="submit"].button-primary,

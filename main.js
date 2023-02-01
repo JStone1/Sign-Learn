@@ -31,24 +31,23 @@ let mainBtn = document.getElementById("mainBtn");
 let startBtn = document.getElementById("startBtn");
 let hintBtn = document.getElementById("hintBtn");
 
-if (isMainScreen) {
-  let timeInterval = setInterval(incrementTime, 1000);
-
-  function incrementTime() {
-    if (startTime) {
-      time -= 1;
-    }
-    // console.log(time);
-    document.getElementById("time").innerHTML = time;
-
-    if (time == 0) {
-      clearInterval(timeInterval);
-      console.log("Times up");
-    }
+let timeInterval = setInterval(decrementTime, 1000);
+function decrementTime() {
+  if (startTime) {
+    time -= 1;
   }
+  // console.log(time);
+  document.getElementById("time").innerHTML = time;
+
+  if (time == 0) {
+    clearInterval(timeInterval);
+    console.log("Times up");
+  }
+}
+if (isMainScreen) {
   startTimeBtn.addEventListener("click", () => {
     startTime = true;
-    incrementTime();
+    decrementTime();
   });
 
   startBtn.addEventListener("click", () => {
@@ -70,36 +69,27 @@ if (isMainScreen) {
   });
 }
 
-mainBtn.addEventListener("click", () => {
-  isMainScreen = true;
-  document.getElementById("main-container").innerHTML = testHTML.mainScreen; // replace the page content with new html
-  // reinitialise the button element and re add the event listner
-  let newHintBtn = document.getElementById("hintBtn");
-  newHintBtn.addEventListener("click", () => {
-    document.getElementById("sign-img").classList.toggle("hidden");
-    if (newHintBtn.innerHTML === "Hide Hint") {
-      newHintBtn.innerHTML = "Show Hint";
-    } else {
-      newHintBtn.innerHTML = "Hide Hint";
-    }
-  });
+splashBtn.addEventListener("click", () => {
+  isMainScreen = false;
+  console.log("Is main screen: ", isMainScreen);
 
-  let newStartBtn = document.getElementById("startBtn");
-  newStartBtn.addEventListener("click", () => {
-    if (isReady) {
-      myCanvas.parent("canvas-container");
-      myCanvas.show();
-      document
-        .getElementById("sign-inner-container")
-        .classList.remove(".hidden");
-      startTime = true;
-    }
+  document.getElementById("main-container").innerHTML = testHTML.splashScreen;
+  startTime = false;
+  time = 30;
+  score = 0;
+
+  let newMainBtn = document.getElementById("mainBtn");
+  newMainBtn.addEventListener("click", () => {
+    isMainScreen = true;
+    console.log("Is main screen: ", isMainScreen);
+    document.getElementById("main-container").innerHTML = testHTML.mainScreen; // replace the page content
   });
-  document.getElementById("sign-inner-container").classList.add("hidden");
+  // myCanvas.hide();
 });
 
 mainBtn.addEventListener("click", () => {
   isMainScreen = true;
+  console.log("Is main screen: ", isMainScreen);
   document.getElementById("main-container").innerHTML = testHTML.mainScreen; // replace the page content with new html
   // reinitialise the button element and re add the event listner
   let newHintBtn = document.getElementById("hintBtn");
@@ -124,15 +114,6 @@ mainBtn.addEventListener("click", () => {
     }
   });
   document.getElementById("sign-inner-container").classList.add("hidden");
-});
-
-splashBtn.addEventListener("click", () => {
-  document.getElementById("main-container").innerHTML = testHTML.splashScreen;
-  startTime = false;
-  time = 30;
-  score = 0;
-
-  // myCanvas.hide();
 });
 
 function setup() {
@@ -234,8 +215,8 @@ function draw() {
   drawKeypoints();
   // drawTipOfIndex();
 }
-
 let signNumber = 1;
+
 // A function to draw ellipses over the detected keypoints
 function drawKeypoints() {
   for (let i = 0; i < predictions.length; i += 1) {

@@ -50,51 +50,54 @@ let testHTML = {
 
   splashScreen: `
   <div
-  class="row"
-  style="background-color: #bfdbf7; border: 1px solid #022b3a"
->
-  <div class="ten columns">
-    <h2>What is it?</h2>
-    <p>
-      This is a learning tool developed to help people practice sign
-      language.
-    </p>
-  </div>
-  <div class="two columns">
-    <img class="icon" src="/images/online-learning.png" />
-  </div>
-</div>
+        class="row"
+        style="background-color: #bfdbf7; border: 1px solid #022b3a"
+      >
+        <div class="ten columns">
+          <h2>What is it?</h2>
+          <p>
+            This is a learning tool developed to help people practice sign
+            language.
+          </p>
+        </div>
+        <div class="two columns">
+          <img class="icon" src="/images/online-learning.png" />
+        </div>
+      </div>
 
-<div
-  class="row"
-  style="background-color: #bfdbf7; border: 1px solid #022b3a"
->
-  <div class="ten columns">
-    <h2>How to use it?</h2>
-    <p>
-      User's will be shown a letter of the ISL alphabet and have to
-      replicate the sign using their webcam.
-    </p>
-  </div>
-  <div class="two columns">
-    <img class="icon" src="/images/hello.png" />
-  </div>
-</div>
+      <div
+        class="row"
+        style="background-color: #bfdbf7; border: 1px solid #022b3a"
+      >
+        <div class="ten columns">
+          <h2>How to use it?</h2>
+          <p>
+            User's will be shown a letter of the ISL alphabet and have to
+            replicate the sign using their webcam.
+          </p>
+        </div>
+        <div class="two columns">
+          <img class="icon" src="/images/hello.png" />
+        </div>
+      </div>
 
-<div
-  class="row"
-  style="background-color: #bfdbf7; border: 1px solid #022b3a"
->
-  <div class="ten columns">
-    <h2>Ready?</h2>
-    <p>
-      Press the button below to go to the next screen - warning you will
-      see your face!
-    </p>
-  </div>
-  <div class="two columns">
-    <img class="icon" src="/images/web-camera.png" />
-  </div>
-</div>
+      <div
+        class="row"
+        style="background-color: #bfdbf7; border: 1px solid #022b3a"
+      >
+        <div class="ten columns">
+          <h2>Ready?</h2>
+          <p>Press the button below to go to the next screen!</p>
+        </div>
+        <div class="two columns">
+          <img class="icon" src="/images/web-camera.png" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="twelve columns"></div>
+        <button class="button-primary" id="mainBtn">
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
 `,
 };
