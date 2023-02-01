@@ -78,11 +78,14 @@ splashBtn.addEventListener("click", () => {
   time = 30;
   score = 0;
 
+  document.getElementById("splashBtn").classList.add("hidden");
+
   let newMainBtn = document.getElementById("mainBtn");
   newMainBtn.addEventListener("click", () => {
     isMainScreen = true;
     console.log("Is main screen: ", isMainScreen);
     document.getElementById("main-container").innerHTML = testHTML.mainScreen; // replace the page content
+    document.getElementById("splashBtn").classList.remove("hidden");
   });
   // myCanvas.hide();
 });
@@ -91,6 +94,7 @@ mainBtn.addEventListener("click", () => {
   isMainScreen = true;
   console.log("Is main screen: ", isMainScreen);
   document.getElementById("main-container").innerHTML = testHTML.mainScreen; // replace the page content with new html
+  document.getElementById("splashBtn").classList.remove("hidden");
   // reinitialise the button element and re add the event listner
   let newHintBtn = document.getElementById("hintBtn");
   newHintBtn.addEventListener("click", () => {

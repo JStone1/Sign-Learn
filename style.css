@@ -122,7 +122,7 @@ button {
 header {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   background-color: #022b3a;
   color: #fff;
@@ -132,6 +132,10 @@ header {
 
 header h1 {
   margin: 0;
+}
+
+header button {
+  margin: 0px;
 }
 
 .container {
@@ -177,6 +181,11 @@ ul {
 
 .hidden {
   opacity: 0;
+  z-index: -1;
+}
+
+.deleted {
+  display: none;
 }
 
 canvas {
