@@ -15,7 +15,7 @@ let testHTML = {
     </section>
   </div>
 
-  <div class="eight columns">
+  <div class="seven columns">
     <div id="canvas-container" style="background-color: grey"></div>
   </div>
 
