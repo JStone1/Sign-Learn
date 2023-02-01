@@ -4,10 +4,12 @@ let testHTML = {
     <section id="instruction-section" class="info-section">
       <h3>Instructions</h3>
       <ul>
-        <li>Point 1</li>
-        <li>Point 2</li>
-        <li>Point 3</li>
-      </ul>
+      <li>
+        Hold your hand in the correct position to mimic the current sign.
+      </li>
+      <li>Get as many correct signs before the time runs out.</li>
+      <li>Press start when you're ready!</li>
+    </ul>
       <button class="button-primary" id="startBtn">Start</button>
     </section>
   </div>
@@ -45,7 +47,10 @@ let testHTML = {
 </div>`,
 
   splashScreen: `
-  <div class="row" style="background-color: lightblue">
+  <div
+  class="row"
+  style="background-color: #bfdbf7; border: 1px solid #022b3a"
+>
   <div class="ten columns">
     <h2>What is it?</h2>
     <p>
@@ -58,7 +63,10 @@ let testHTML = {
   </div>
 </div>
 
-<div class="row" style="background-color: lightgreen">
+<div
+  class="row"
+  style="background-color: #bfdbf7; border: 1px solid #022b3a"
+>
   <div class="ten columns">
     <h2>How to use it?</h2>
     <p>
@@ -71,7 +79,10 @@ let testHTML = {
   </div>
 </div>
 
-<div class="row" style="background-color: lightyellow">
+<div
+  class="row"
+  style="background-color: #bfdbf7; border: 1px solid #022b3a"
+>
   <div class="ten columns">
     <h2>Ready?</h2>
     <p>

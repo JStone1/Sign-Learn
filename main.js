@@ -77,18 +77,20 @@ mainBtn.addEventListener("click", () => {
     if (isReady) {
       myCanvas.parent("canvas-container");
       myCanvas.show();
-      document.getElementById("sign-section").classList.remove("hidden");
+      document
+        .getElementById("sign-inner-container")
+        .classList.remove(".hidden");
       startTime = true;
     }
   });
-  document.getElementById("sign-section").classList.add("hidden");
+  document.getElementById("sign-inner-container").classList.add("hidden");
 });
 
 startBtn.addEventListener("click", () => {
   if (isReady) {
     myCanvas.parent("canvas-container");
     myCanvas.show();
-    document.getElementById("sign-section").classList.remove("hidden");
+    document.getElementById("sign-inner-container").classList.remove("hidden");
   }
 });
 
