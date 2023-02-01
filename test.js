@@ -1,6 +1,6 @@
 let testHTML = {
   mainScreen: `            <div class="row">
-  <div class="three columns" style="background-color: antiquewhite">
+  <div class="three columns">
     <section id="instruction-section" class="info-section">
       <h3>Instructions</h3>
       <ul>
@@ -18,12 +18,14 @@ let testHTML = {
     <div id="canvas-container" style="background-color: grey"></div>
   </div>
 
-  <div class="three columns" style="background-color: antiquewhite">
-    <section id="sign-section" class="info-section hidden">
-      <h3>Current sign</h3>
-      <!-- <p>Letter B</p> -->
-      <img id="sign-img" src="/images/Letter B.png" />
-      <button class="button-primary" id="hintBtn">Hide Hint</button>
+  <div class="three columns">
+    <section id="sign-section" class="info-section">
+      <div id="sign-inner-container" class="hidden">
+        <h3>Current sign</h3>
+        <!-- <p>Letter B</p> -->
+        <img id="sign-img" src="/images/Letter B.png" />
+        <button class="button-primary" id="hintBtn">Hide Hint</button>
+      </div>
     </section>
   </div>
 </div>

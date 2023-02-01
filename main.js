@@ -3,6 +3,7 @@ let video;
 let myCanvas;
 let predictions = [];
 let isReady = false;
+let isMainScreen = false;
 
 // variables to store finger coordinates
 let indexFinger = [];
@@ -24,42 +25,53 @@ let time = 30;
 let score = 0;
 let startTime = false;
 
-let timeInterval = setInterval(incrementTime, 1000);
-
-function incrementTime() {
-  if (startTime) {
-    time -= 1;
-  }
-  // console.log(time);
-  document.getElementById("time").innerHTML = time;
-
-  if (time == 0) {
-    clearInterval(timeInterval);
-    console.log("Times up");
-  }
-}
-
 let startTimeBtn = document.getElementById("startBtn");
 let splashBtn = document.getElementById("splashBtn");
 let mainBtn = document.getElementById("mainBtn");
 let startBtn = document.getElementById("startBtn");
 let hintBtn = document.getElementById("hintBtn");
 
-startTimeBtn.addEventListener("click", () => {
-  startTime = true;
-  incrementTime();
-});
+if (isMainScreen) {
+  let timeInterval = setInterval(incrementTime, 1000);
 
-splashBtn.addEventListener("click", () => {
-  document.getElementById("main-container").innerHTML = testHTML.splashScreen;
-  startTime = false;
-  time = 30;
-  score = 0;
+  function incrementTime() {
+    if (startTime) {
+      time -= 1;
+    }
+    // console.log(time);
+    document.getElementById("time").innerHTML = time;
 
-  // myCanvas.hide();
-});
+    if (time == 0) {
+      clearInterval(timeInterval);
+      console.log("Times up");
+    }
+  }
+  startTimeBtn.addEventListener("click", () => {
+    startTime = true;
+    incrementTime();
+  });
+
+  startBtn.addEventListener("click", () => {
+    if (isReady) {
+      myCanvas.parent("canvas-container");
+      myCanvas.show();
+      document
+        .getElementById("sign-inner-container")
+        .classList.remove("hidden");
+    }
+  });
+  hintBtn.addEventListener("click", () => {
+    document.getElementById("sign-img").classList.toggle("hidden");
+    if (hintBtn.innerHTML === "Hide Hint") {
+      hintBtn.innerHTML = "Show Hint";
+    } else {
+      hintBtn.innerHTML = "Hide Hint";
+    }
+  });
+}
 
 mainBtn.addEventListener("click", () => {
+  isMainScreen = true;
   document.getElementById("main-container").innerHTML = testHTML.mainScreen; // replace the page content with new html
   // reinitialise the button element and re add the event listner
   let newHintBtn = document.getElementById("hintBtn");
@@ -86,21 +98,41 @@ mainBtn.addEventListener("click", () => {
   document.getElementById("sign-inner-container").classList.add("hidden");
 });
 
-startBtn.addEventListener("click", () => {
-  if (isReady) {
-    myCanvas.parent("canvas-container");
-    myCanvas.show();
-    document.getElementById("sign-inner-container").classList.remove("hidden");
-  }
+mainBtn.addEventListener("click", () => {
+  isMainScreen = true;
+  document.getElementById("main-container").innerHTML = testHTML.mainScreen; // replace the page content with new html
+  // reinitialise the button element and re add the event listner
+  let newHintBtn = document.getElementById("hintBtn");
+  newHintBtn.addEventListener("click", () => {
+    document.getElementById("sign-img").classList.toggle("hidden");
+    if (newHintBtn.innerHTML === "Hide Hint") {
+      newHintBtn.innerHTML = "Show Hint";
+    } else {
+      newHintBtn.innerHTML = "Hide Hint";
+    }
+  });
+
+  let newStartBtn = document.getElementById("startBtn");
+  newStartBtn.addEventListener("click", () => {
+    if (isReady) {
+      myCanvas.parent("canvas-container");
+      myCanvas.show();
+      document
+        .getElementById("sign-inner-container")
+        .classList.remove("hidden");
+      startTime = true;
+    }
+  });
+  document.getElementById("sign-inner-container").classList.add("hidden");
 });
 
-hintBtn.addEventListener("click", () => {
-  document.getElementById("sign-img").classList.toggle("hidden");
-  if (hintBtn.innerHTML === "Hide Hint") {
-    hintBtn.innerHTML = "Show Hint";
-  } else {
-    hintBtn.innerHTML = "Hide Hint";
-  }
+splashBtn.addEventListener("click", () => {
+  document.getElementById("main-container").innerHTML = testHTML.splashScreen;
+  startTime = false;
+  time = 30;
+  score = 0;
+
+  // myCanvas.hide();
 });
 
 function setup() {
