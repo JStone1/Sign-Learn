@@ -1,54 +1,4 @@
 let testHTML = {
-  mainScreen: `           <div class="row">
-  <div class="three columns">
-    <section id="instruction-section" class="info-section">
-      <h3>Instructions</h3>
-      <ul>
-        <li>
-          Hold your hand in the correct position to mimic the current
-          sign.
-        </li>
-        <li>Get as many correct signs before the time runs out.</li>
-        <li>Press start when you're ready!</li>
-      </ul>
-      <button class="button-primary" id="startBtn">Start</button>
-    </section>
-  </div>
-
-  <div class="seven columns">
-    <div id="canvas-container" style="background-color: grey"></div>
-  </div>
-
-  <div class="three columns">
-    <section id="sign-section" class="info-section">
-      <div id="sign-inner-container" class="hidden">
-        <h3>Current sign</h3>
-        <!-- <p>Letter B</p> -->
-        <img id="sign-img" src="/images/Letter B.png" />
-        <button class="button-primary" id="hintBtn">Hide Hint</button>
-      </div>
-    </section>
-  </div>
-</div>
-
-<div class="row">
-  <!-- <div class="two columns" style="text-align: center"> -->
-  <!-- <div><p>.</p></div> -->
-  <!-- </div> -->
-  <div class="four columns stats">
-    <p><strong>Score</strong></p>
-    <p id="score">0</p>
-  </div>
-
-  <div class="four columns stats">
-    <p><strong>Time</strong></p>
-    <p id="time">0</p>
-  </div>
-  <!-- <div class="two columns" style="text-align: center">
-    <div><p>.</p></div>
-  </div> -->
-</div>`,
-
   splashScreen: `
   <div
   class="row"
@@ -78,7 +28,7 @@ let testHTML = {
     </p>
   </div>
   <div class="two columns">
-    <img class="icon" src="/images/hello.png" />
+    <img class="icon" src="/images/learning.png" />
   </div>
 </div>
 
@@ -91,7 +41,7 @@ let testHTML = {
     <p>Press the button below to go to the next screen!</p>
   </div>
   <div class="two columns">
-    <img class="icon" src="/images/web-camera.png" />
+    <img class="icon" src="/images/webcam.png" />
   </div>
 </div>
 <div class="row">
@@ -101,4 +51,52 @@ let testHTML = {
   </button>
 </div>
 `,
+  mainScreen: `           <div class="row">
+<div class="three columns">
+  <section id="instruction-section" class="info-section">
+    <h3>Instructions</h3>
+    <ul>
+      <li>
+        Hold your hand in the correct position to mimic the current
+        sign.
+      </li>
+      <li>Get as many correct signs before the time runs out.</li>
+      <li>Press start when you're ready!</li>
+    </ul>
+    <button class="button-primary" id="startBtn">Start</button>
+  </section>
+</div>
+
+<div class="seven columns">
+  <div id="canvas-container" style="background-color: grey"></div>
+</div>
+
+<div class="three columns">
+  <section id="sign-section" class="info-section">
+    <div id="sign-inner-container" class="hidden">
+      <h3 id="current-sign">Letter B</h3>
+      <img id="sign-img" src="/images/Letter B.png" />
+      <button class="button-primary" id="hintBtn">Hide Hint</button>
+    </div>
+  </section>
+</div>
+</div>
+
+<div class="row">
+<!-- <div class="two columns" style="text-align: center"> -->
+<!-- <div><p>.</p></div> -->
+<!-- </div> -->
+<div class="four columns stats">
+  <p><strong>Score</strong></p>
+  <p id="score">0</p>
+</div>
+
+<div class="four columns stats">
+  <p><strong>Time</strong></p>
+  <p id="time">0</p>
+</div>
+<!-- <div class="two columns" style="text-align: center">
+  <div><p>.</p></div>
+</div> -->
+</div>`,
 };

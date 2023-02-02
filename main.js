@@ -390,6 +390,7 @@ function letterB() {
     score++;
     document.getElementById("sign-img").src = "/images/Letter Y.png";
     document.getElementById("sign-img").style.width = "90%";
+    document.getElementById("current-sign").innerHTML = "Letter Y";
     console.log("Sign number: ", signNumber);
   }
 }
@@ -401,6 +402,7 @@ function letterY() {
     score++;
     document.getElementById("sign-img").src = "/images/Letter C.png";
     document.getElementById("sign-img").style.width = "90%";
+    document.getElementById("current-sign").innerHTML = "Letter C";
     console.log("Sign number: ", signNumber);
   }
 }
