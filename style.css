@@ -206,14 +206,27 @@ canvas {
   border: 1px solid black;
 }
 
+#stat-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  /* border: 1px solid black; */
+}
+
+#stat-container p {
+  margin: 5px;
+}
+
 .stat {
   text-align: center;
-  font-size: 2.5rem;
+  font-size: 2rem;
 }
 
 #results {
   text-align: center;
   margin: 0;
+  padding: 10px;
 }
 
 /* Adjusting Skeleton CSS buttons to my own styles */

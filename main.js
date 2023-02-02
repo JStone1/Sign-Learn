@@ -287,25 +287,13 @@ function drawKeypoints() {
       noStroke();
       ellipse(circleOfRing[0], circleOfRing[1], 7, 7);
 
-      fill(0, 0, 255);
-      noStroke();
-      ellipse(circleBaseOfRing[0], circleBaseOfRing[1], 7, 7);
-
       fill(255, 0, 0);
       noStroke();
       ellipse(circleOfMiddle[0], circleOfMiddle[1], 7, 7);
 
-      fill(0, 0, 255);
-      noStroke();
-      ellipse(circleBaseOfMiddle[0], circleBaseOfMiddle[1], 7, 7);
-
       fill(255, 0, 0);
       noStroke();
       ellipse(circleOfIndex[0], circleOfIndex[1], 7, 7);
-
-      fill(0, 0, 255);
-      noStroke();
-      ellipse(circleBaseOfIndex[0], circleBaseOfIndex[1], 7, 7);
 
       let ringDistance = dist(
         baseOfRing[0],
@@ -358,7 +346,7 @@ function drawKeypoints() {
       fill(255, 0, 0);
       noStroke();
       ellipse(circleOfIndex[0], circleOfIndex[1], 7, 7);
-      if (thumbDistance > 60 && thumbDistance < 80) {
+      if (thumbDistance > 50 && thumbDistance < 90) {
         fill(0, 255, 0);
         noStroke();
         ellipse(circleOfThumb[0], circleOfThumb[1], 7, 7);

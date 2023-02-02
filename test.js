@@ -51,38 +51,7 @@ let testHTML = {
   </button>
 </div>
 `,
-  mainScreen: `           <div class="row">
-<div class="three columns">
-  <section id="instruction-section" class="info-section">
-    <h3>Instructions</h3>
-    <ul>
-      <li>
-        Hold your hand in the correct position to mimic the current
-        sign.
-      </li>
-      <li>Get as many correct signs before the time runs out.</li>
-      <li>Press start when you're ready!</li>
-    </ul>
-    <button class="button-primary" id="startBtn">Start</button>
-  </section>
-</div>
-
-<div class="seven columns">
-  <div id="canvas-container" style="background-color: grey"></div>
-</div>
-
-<div class="three columns">
-  <section id="sign-section" class="info-section">
-    <div id="sign-inner-container" class="hidden">
-      <h3 id="current-sign">Letter B</h3>
-      <img id="sign-img" src="/images/Letter B.png" />
-      <button class="button-primary" id="hintBtn">Hide Hint</button>
-    </div>
-  </section>
-</div>
-</div>
-
-<div id="stat-container" class="row">
+  mainScreen: `         <div id="stat-container">
   <div class="four columns stat">
     <p><strong>Score</strong></p>
     <p id="score">0</p>
@@ -91,6 +60,36 @@ let testHTML = {
   <div class="four columns stat">
     <p><strong>Time</strong></p>
     <p id="time">0</p>
+  </div>
+</div>
+<div class="row">
+  <div class="three columns">
+    <section id="instruction-section" class="info-section">
+      <h3>Instructions</h3>
+      <ul>
+        <li>
+          Hold your hand in the correct position to mimic the current
+          sign.
+        </li>
+        <li>Get as many correct signs before the time runs out.</li>
+        <li>Press start when you're ready!</li>
+      </ul>
+      <button class="button-primary" id="startBtn">Start</button>
+    </section>
+  </div>
+
+  <div class="seven columns">
+    <div id="canvas-container" style="background-color: grey"></div>
+  </div>
+
+  <div class="three columns">
+    <section id="sign-section" class="info-section">
+      <div id="sign-inner-container" class="hidden">
+        <h3 id="current-sign">Letter B</h3>
+        <img id="sign-img" src="/images/Letter B.png" />
+        <button class="button-primary" id="hintBtn">Hide Hint</button>
+      </div>
+    </section>
   </div>
 </div>`,
   results: `<h3 id="results">Results:</h3>
