@@ -115,6 +115,10 @@ button {
   margin: 0px;
 }
 
+.row:last-child p {
+  margin: 10px;
+}
+
 .icon {
   width: 90px;
 }
@@ -127,7 +131,7 @@ header {
   background-color: #022b3a;
   color: #fff;
   text-align: center;
-  height: 130px;
+  height: 12%;
 }
 
 header h1 {
@@ -202,9 +206,14 @@ canvas {
   border: 1px solid black;
 }
 
-.stats {
+.stat {
   text-align: center;
   font-size: 2.5rem;
+}
+
+#results {
+  text-align: center;
+  margin: 0;
 }
 
 /* Adjusting Skeleton CSS buttons to my own styles */

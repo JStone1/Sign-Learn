@@ -82,21 +82,17 @@ let testHTML = {
 </div>
 </div>
 
-<div class="row">
-<!-- <div class="two columns" style="text-align: center"> -->
-<!-- <div><p>.</p></div> -->
-<!-- </div> -->
-<div class="four columns stats">
-  <p><strong>Score</strong></p>
-  <p id="score">0</p>
-</div>
+<div id="stat-container" class="row">
+  <div class="four columns stat">
+    <p><strong>Score</strong></p>
+    <p id="score">0</p>
+  </div>
 
-<div class="four columns stats">
-  <p><strong>Time</strong></p>
-  <p id="time">0</p>
-</div>
-<!-- <div class="two columns" style="text-align: center">
-  <div><p>.</p></div>
-</div> -->
+  <div class="four columns stat">
+    <p><strong>Time</strong></p>
+    <p id="time">0</p>
+  </div>
 </div>`,
+  results: `<h3 id="results">Results:</h3>
+            `,
 };

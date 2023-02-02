@@ -25,6 +25,8 @@ let time = 30;
 let score = 0;
 let startTime = false;
 
+let signNumber = 0;
+
 let splashBtn = document.getElementById("splashBtn");
 let mainBtn = document.getElementById("mainBtn");
 
@@ -50,6 +52,7 @@ if (isMainScreen) {
       document
         .getElementById("sign-inner-container")
         .classList.remove("hidden");
+      signNumber = 1;
     }
   });
 
@@ -90,6 +93,7 @@ mainBtn.addEventListener("click", () => {
           .getElementById("sign-inner-container")
           .classList.remove("hidden");
         startTime = true;
+        signNumber = 1;
       }
     });
   }
@@ -110,6 +114,7 @@ splashBtn.addEventListener("click", () => {
 
   let newMainBtn = document.getElementById("mainBtn");
   newMainBtn.addEventListener("click", () => {
+    timeInterval = setInterval(decrementTime, 1000);
     isMainScreen = true;
     console.log("Is main screen: ", isMainScreen);
     document.getElementById("main-container").innerHTML = testHTML.mainScreen; // replace the page content
@@ -135,6 +140,7 @@ splashBtn.addEventListener("click", () => {
             .getElementById("sign-inner-container")
             .classList.remove("hidden");
           startTime = true;
+          signNumber = 1;
         }
       });
     }
@@ -218,13 +224,10 @@ function setup() {
 
 document.addEventListener("visibilitychange", function () {
   if (document.hidden) {
-    console.log("Browser tab is hidden");
-    video.pause();
-    document.title = "Video paused";
+    document.title = "Sign Learn - Come back!";
   } else {
-    console.log("Browser tab is visible");
     video.play();
-    document.title = "Video playing";
+    document.title = "Sign Learn";
   }
 });
 
@@ -241,153 +244,160 @@ function draw() {
   drawKeypoints();
   // drawTipOfIndex();
 }
-let signNumber = 1;
 
 // A function to draw ellipses over the detected keypoints
 function drawKeypoints() {
-  for (let i = 0; i < predictions.length; i += 1) {
-    const prediction = predictions[i];
-    for (let j = 0; j < prediction.landmarks.length; j += 1) {
-      const keypoint = prediction.landmarks[j];
-      // fill(0, 255, 0);
-      // noStroke();
-      // ellipse(keypoint[0], keypoint[1], 7, 7);
-    }
+  const circleOfThumb = tipOfThumb;
+  const circleOfPinky = baseOfPinky;
+  const circleOfRing = tipOfRingFinger;
+  const circleBaseOfRing = baseOfRing;
+  const circleOfMiddle = tipOfMiddleFinger;
+  const circleBaseOfMiddle = baseOfMiddle;
+  const circleOfIndex = tipOfIndexFinger;
+  const circleBaseOfIndex = baseOfIndex;
 
-    document.getElementById("score").innerHTML = score;
-    const circleOfThumb = tipOfThumb;
-    const circleOfPinky = baseOfPinky;
-    const circleOfRing = tipOfRingFinger;
-    const circleBaseOfRing = baseOfRing;
-    const circleOfMiddle = tipOfMiddleFinger;
-    const circleBaseOfMiddle = baseOfMiddle;
-    const circleOfIndex = tipOfIndexFinger;
-    const circleBaseOfIndex = baseOfIndex;
+  switch (signNumber) {
+    case 1:
+      let distance = dist(
+        baseOfPinky[0],
+        baseOfPinky[1],
+        tipOfThumb[0],
+        tipOfThumb[1]
+      );
+      fill(255, 0, 0);
+      noStroke();
+      ellipse(circleOfThumb[0], circleOfThumb[1], 7, 7);
 
-    switch (signNumber) {
-      case 1:
-        let distance = dist(
-          baseOfPinky[0],
-          baseOfPinky[1],
-          tipOfThumb[0],
-          tipOfThumb[1]
-        );
-        fill(255, 0, 0);
-        noStroke();
-        ellipse(circleOfThumb[0], circleOfThumb[1], 7, 7);
-
-        fill(255, 0, 0);
+      fill(255, 0, 0);
+      noStroke();
+      ellipse(circleOfPinky[0], circleOfPinky[1], 7, 7);
+      if (distance < 50) {
+        fill(0, 255, 0);
         noStroke();
         ellipse(circleOfPinky[0], circleOfPinky[1], 7, 7);
-        if (distance < 50) {
-          fill(0, 255, 0);
-          noStroke();
-          ellipse(circleOfPinky[0], circleOfPinky[1], 7, 7);
-          fill(0, 255, 0);
-          noStroke();
-          ellipse(circleOfThumb[0], circleOfThumb[1], 7, 7);
-          setTimeout(letterB, 3000);
-        }
+        fill(0, 255, 0);
+        noStroke();
+        ellipse(circleOfThumb[0], circleOfThumb[1], 7, 7);
+        setTimeout(letterB, 3000);
+      }
 
-        break;
-      case 2:
-        fill(255, 0, 0);
+      break;
+    case 2:
+      fill(255, 0, 0);
+      noStroke();
+      ellipse(circleOfRing[0], circleOfRing[1], 7, 7);
+
+      fill(0, 0, 255);
+      noStroke();
+      ellipse(circleBaseOfRing[0], circleBaseOfRing[1], 7, 7);
+
+      fill(255, 0, 0);
+      noStroke();
+      ellipse(circleOfMiddle[0], circleOfMiddle[1], 7, 7);
+
+      fill(0, 0, 255);
+      noStroke();
+      ellipse(circleBaseOfMiddle[0], circleBaseOfMiddle[1], 7, 7);
+
+      fill(255, 0, 0);
+      noStroke();
+      ellipse(circleOfIndex[0], circleOfIndex[1], 7, 7);
+
+      fill(0, 0, 255);
+      noStroke();
+      ellipse(circleBaseOfIndex[0], circleBaseOfIndex[1], 7, 7);
+
+      let ringDistance = dist(
+        baseOfRing[0],
+        baseOfRing[1],
+        tipOfRingFinger[0],
+        tipOfRingFinger[1]
+      );
+      let middleDistance = dist(
+        baseOfMiddle[0],
+        baseOfMiddle[1],
+        tipOfMiddleFinger[0],
+        tipOfMiddleFinger[1]
+      );
+      let indexDistance = dist(
+        baseOfIndex[0],
+        baseOfIndex[1],
+        tipOfIndexFinger[0],
+        tipOfIndexFinger[1]
+      );
+
+      if (
+        ringDistance > 50 &&
+        middleDistance > 50 &&
+        indexDistance > 45 &&
+        tipOfMiddleFinger[1] > baseOfMiddle[1]
+      ) {
+        fill(0, 255, 0);
         noStroke();
         ellipse(circleOfRing[0], circleOfRing[1], 7, 7);
-
-        fill(0, 0, 255);
-        noStroke();
-        ellipse(circleBaseOfRing[0], circleBaseOfRing[1], 7, 7);
-
-        fill(255, 0, 0);
+        fill(0, 255, 0);
         noStroke();
         ellipse(circleOfMiddle[0], circleOfMiddle[1], 7, 7);
-
-        fill(0, 0, 255);
-        noStroke();
-        ellipse(circleBaseOfMiddle[0], circleBaseOfMiddle[1], 7, 7);
-
-        fill(255, 0, 0);
+        fill(0, 255, 0);
         noStroke();
         ellipse(circleOfIndex[0], circleOfIndex[1], 7, 7);
+        setTimeout(letterY, 3000);
+      }
+      break;
+    case 3:
+      let thumbDistance = dist(
+        tipOfIndexFinger[0],
+        tipOfIndexFinger[1],
+        tipOfThumb[0],
+        tipOfThumb[1]
+      );
+      fill(255, 0, 0);
+      noStroke();
+      ellipse(circleOfThumb[0], circleOfThumb[1], 7, 7);
 
-        fill(0, 0, 255);
-        noStroke();
-        ellipse(circleBaseOfIndex[0], circleBaseOfIndex[1], 7, 7);
-
-        let ringDistance = dist(
-          baseOfRing[0],
-          baseOfRing[1],
-          tipOfRingFinger[0],
-          tipOfRingFinger[1]
-        );
-        let middleDistance = dist(
-          baseOfMiddle[0],
-          baseOfMiddle[1],
-          tipOfMiddleFinger[0],
-          tipOfMiddleFinger[1]
-        );
-        let indexDistance = dist(
-          baseOfIndex[0],
-          baseOfIndex[1],
-          tipOfIndexFinger[0],
-          tipOfIndexFinger[1]
-        );
-
-        if (
-          ringDistance > 50 &&
-          middleDistance > 50 &&
-          indexDistance > 45 &&
-          tipOfMiddleFinger[1] > baseOfMiddle[1]
-        ) {
-          fill(0, 255, 0);
-          noStroke();
-          ellipse(circleOfRing[0], circleOfRing[1], 7, 7);
-          fill(0, 255, 0);
-          noStroke();
-          ellipse(circleOfMiddle[0], circleOfMiddle[1], 7, 7);
-          fill(0, 255, 0);
-          noStroke();
-          ellipse(circleOfIndex[0], circleOfIndex[1], 7, 7);
-          setTimeout(letterY, 3000);
-        }
-        break;
-      case 3:
-        let thumbDistance = dist(
-          tipOfIndexFinger[0],
-          tipOfIndexFinger[1],
-          tipOfThumb[0],
-          tipOfThumb[1]
-        );
-        fill(255, 0, 0);
+      fill(255, 0, 0);
+      noStroke();
+      ellipse(circleOfIndex[0], circleOfIndex[1], 7, 7);
+      if (thumbDistance > 60 && thumbDistance < 80) {
+        fill(0, 255, 0);
         noStroke();
         ellipse(circleOfThumb[0], circleOfThumb[1], 7, 7);
 
-        fill(255, 0, 0);
+        fill(0, 255, 0);
         noStroke();
         ellipse(circleOfIndex[0], circleOfIndex[1], 7, 7);
-        if (thumbDistance > 60 && thumbDistance < 80) {
-          fill(0, 255, 0);
-          noStroke();
-          ellipse(circleOfThumb[0], circleOfThumb[1], 7, 7);
-
-          fill(0, 255, 0);
-          noStroke();
-          ellipse(circleOfIndex[0], circleOfIndex[1], 7, 7);
-          setTimeout(letterC, 3000);
+        setTimeout(letterC, 3000);
+      }
+      break;
+    case 4:
+      for (let i = 0; i < predictions.length; i += 1) {
+        const prediction = predictions[i];
+        for (let j = 0; j < prediction.landmarks.length; j += 1) {
+          const keypoint = prediction.landmarks[j];
+          fill(191, 219, 247);
+          // noStroke();
+          ellipse(keypoint[0], keypoint[1], 7, 7);
         }
-        break;
-      case 4:
+        clearInterval(timeInterval);
         console.log("All signs complete - well done!");
-    }
+      }
+      break;
   }
 }
+
+// showResults();
+
+// function showResults() {
+//   document.getElementById("stat-container").innerHTML =
+//     "All signs done - Well done!";
+// }
 
 function letterB() {
   if (signNumber == 1) {
     console.log("B correct!");
     signNumber++;
     score++;
+    document.getElementById("score").innerHTML = score;
     document.getElementById("sign-img").src = "/images/Letter Y.png";
     document.getElementById("sign-img").style.width = "90%";
     document.getElementById("current-sign").innerHTML = "Letter Y";
@@ -400,6 +410,7 @@ function letterY() {
     console.log("F correct!");
     signNumber++;
     score++;
+    document.getElementById("score").innerHTML = score;
     document.getElementById("sign-img").src = "/images/Letter C.png";
     document.getElementById("sign-img").style.width = "90%";
     document.getElementById("current-sign").innerHTML = "Letter C";
@@ -412,6 +423,11 @@ function letterC() {
     console.log("C correct!");
     signNumber++;
     score++;
+    document.getElementById("score").innerHTML = score;
+    console.log(document.getElementById("stat-container"));
+    document
+      .getElementById("stat-container")
+      .insertAdjacentHTML("beforebegin", testHTML.results);
     console.log("Sign number: ", signNumber);
   }
 }
