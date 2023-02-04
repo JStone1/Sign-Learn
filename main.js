@@ -283,6 +283,31 @@ function drawKeypoints() {
 
       break;
     case 2:
+      let thumbDistance = dist(
+        tipOfIndexFinger[0],
+        tipOfIndexFinger[1],
+        tipOfThumb[0],
+        tipOfThumb[1]
+      );
+      fill(255, 0, 0);
+      noStroke();
+      ellipse(circleOfThumb[0], circleOfThumb[1], 7, 7);
+
+      fill(255, 0, 0);
+      noStroke();
+      ellipse(circleOfIndex[0], circleOfIndex[1], 7, 7);
+      if (thumbDistance > 50 && thumbDistance < 90) {
+        fill(0, 255, 0);
+        noStroke();
+        ellipse(circleOfThumb[0], circleOfThumb[1], 7, 7);
+
+        fill(0, 255, 0);
+        noStroke();
+        ellipse(circleOfIndex[0], circleOfIndex[1], 7, 7);
+        setTimeout(letterC, 3000);
+      }
+      break;
+    case 3:
       fill(255, 0, 0);
       noStroke();
       ellipse(circleOfRing[0], circleOfRing[1], 7, 7);
@@ -332,31 +357,6 @@ function drawKeypoints() {
         setTimeout(letterY, 3000);
       }
       break;
-    case 3:
-      let thumbDistance = dist(
-        tipOfIndexFinger[0],
-        tipOfIndexFinger[1],
-        tipOfThumb[0],
-        tipOfThumb[1]
-      );
-      fill(255, 0, 0);
-      noStroke();
-      ellipse(circleOfThumb[0], circleOfThumb[1], 7, 7);
-
-      fill(255, 0, 0);
-      noStroke();
-      ellipse(circleOfIndex[0], circleOfIndex[1], 7, 7);
-      if (thumbDistance > 50 && thumbDistance < 90) {
-        fill(0, 255, 0);
-        noStroke();
-        ellipse(circleOfThumb[0], circleOfThumb[1], 7, 7);
-
-        fill(0, 255, 0);
-        noStroke();
-        ellipse(circleOfIndex[0], circleOfIndex[1], 7, 7);
-        setTimeout(letterC, 3000);
-      }
-      break;
     case 4:
       for (let i = 0; i < predictions.length; i += 1) {
         const prediction = predictions[i];
@@ -366,7 +366,6 @@ function drawKeypoints() {
           // noStroke();
           ellipse(keypoint[0], keypoint[1], 7, 7);
         }
-        clearInterval(timeInterval);
         console.log("All signs complete - well done!");
       }
       break;
@@ -386,19 +385,6 @@ function letterB() {
     signNumber++;
     score++;
     document.getElementById("score").innerHTML = score;
-    document.getElementById("sign-img").src = "/images/Letter Y.png";
-    document.getElementById("sign-img").style.width = "90%";
-    document.getElementById("current-sign").innerHTML = "Letter Y";
-    console.log("Sign number: ", signNumber);
-  }
-}
-
-function letterY() {
-  if (signNumber == 2) {
-    console.log("F correct!");
-    signNumber++;
-    score++;
-    document.getElementById("score").innerHTML = score;
     document.getElementById("sign-img").src = "/images/Letter C.png";
     document.getElementById("sign-img").style.width = "90%";
     document.getElementById("current-sign").innerHTML = "Letter C";
@@ -407,10 +393,25 @@ function letterY() {
 }
 
 function letterC() {
-  if (signNumber == 3) {
+  if (signNumber == 2) {
     console.log("C correct!");
     signNumber++;
     score++;
+    document.getElementById("score").innerHTML = score;
+    document.getElementById("sign-img").src = "/images/Letter Y.png";
+    document.getElementById("sign-img").style.width = "90%";
+    document.getElementById("current-sign").innerHTML = "Letter Y";
+
+    console.log("Sign number: ", signNumber);
+  }
+}
+
+function letterY() {
+  if (signNumber == 3) {
+    console.log("F correct!");
+    signNumber++;
+    score++;
+    clearInterval(timeInterval);
     document.getElementById("score").innerHTML = score;
     console.log(document.getElementById("stat-container"));
     document
