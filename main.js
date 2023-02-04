@@ -70,7 +70,7 @@ mainBtn.addEventListener("click", () => {
   isMainScreen = true;
   console.log("Is main screen: ", isMainScreen);
   console.log("Is ready: ", isReady);
-  document.getElementById("main-container").innerHTML = testHTML.mainScreen; // replace the page content with new html
+  document.getElementById("main-container").innerHTML = pages.mainScreen; // replace the page content with new html
   document.getElementById("splashBtn").classList.remove("hidden");
   // reinitialise the button element and re add the event listner
   let hintBtn = document.getElementById("hintBtn");
@@ -105,7 +105,7 @@ splashBtn.addEventListener("click", () => {
   isMainScreen = false;
   console.log("Is main screen: ", isMainScreen);
 
-  document.getElementById("main-container").innerHTML = testHTML.splashScreen;
+  document.getElementById("main-container").innerHTML = pages.splashScreen;
   startTime = false;
   time = 30;
   score = 0;
@@ -117,7 +117,7 @@ splashBtn.addEventListener("click", () => {
     timeInterval = setInterval(decrementTime, 1000);
     isMainScreen = true;
     console.log("Is main screen: ", isMainScreen);
-    document.getElementById("main-container").innerHTML = testHTML.mainScreen; // replace the page content
+    document.getElementById("main-container").innerHTML = pages.mainScreen; // replace the page content
     document.getElementById("splashBtn").classList.remove("hidden");
 
     let newHintBtn = document.getElementById("hintBtn");
@@ -391,7 +391,7 @@ function letterB() {
     signNumber++;
     score++;
     document.getElementById("score").innerHTML = score;
-    document.getElementById("sign-img").src = "/images/Letter C.png";
+    document.getElementById("sign-img").src = "./images/Letter C.png";
     document.getElementById("sign-img").style.width = "90%";
     document.getElementById("current-sign").innerHTML = "Letter C";
     console.log("Sign number: ", signNumber);
@@ -404,7 +404,7 @@ function letterC() {
     signNumber++;
     score++;
     document.getElementById("score").innerHTML = score;
-    document.getElementById("sign-img").src = "/images/Letter Y.png";
+    document.getElementById("sign-img").src = "./images/Letter Y.png";
     document.getElementById("sign-img").style.width = "90%";
     document.getElementById("current-sign").innerHTML = "Letter Y";
 
@@ -422,7 +422,7 @@ function letterY() {
     console.log(document.getElementById("stat-container"));
     document
       .getElementById("stat-container")
-      .insertAdjacentHTML("beforebegin", testHTML.results);
+      .insertAdjacentHTML("beforebegin", pages.results);
     console.log("Sign number: ", signNumber);
   }
 }

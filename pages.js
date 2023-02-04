@@ -1,4 +1,4 @@
-let testHTML = {
+let pages = {
   splashScreen: `
   <div
   class="row"
