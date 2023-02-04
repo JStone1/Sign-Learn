@@ -358,6 +358,12 @@ function drawKeypoints() {
       }
       break;
     case 4:
+      // document.getElementById("sign-inner-container").classList.add("hidden");
+      document.getElementById("sign-inner-container").innerHTML =
+        "All signs complete!";
+      document.getElementById("sign-inner-container").style.textAlign =
+        "center";
+      document.getElementById("startBtn").classList.add("hidden");
       for (let i = 0; i < predictions.length; i += 1) {
         const prediction = predictions[i];
         for (let j = 0; j < prediction.landmarks.length; j += 1) {
