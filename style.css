@@ -1,108 +1,3 @@
-/* 
-
-body {
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.splashScreen {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  text-align: center;
-}
-
-.splashScreen h1 {
-  font-size: 3em;
-}
-
-.splashScreen p {
-  font-size: 1em;
-}
-
-#main-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  width: 80%;
-}
-
-#secondary-container {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  width: 100%;
-}
-
-#instruction-section {
-  display: flex;
-  flex-direction: column;
-}
-
-.placeholder-canvas {
-  width: 50%;
-  height: 480px;
-  background-color: rgb(146, 206, 234);
-}
-
-#sign-section {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-}
-
-.current-sign-info {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  font-size: 2em;
-}
-
-
-
-.correct {
-  background-color: green;
-}
-
-.incorrect {
-  background-color: red;
-}
-
-.invisible {
-  opacity: 0;
-}
-
-#stats-container {
-  display: flex;
-  width: 40%;
-  justify-content: space-between;
-}
-
-
-button {
-  cursor: pointer;
-} 
-
-.lives {
-  display: flex;
-}
-
-.heart {
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
-  background-color: red;
-  margin: 5px;
-}
-*/
-
 .row {
   margin: 75px 0px;
   padding: 10px;
@@ -189,6 +84,7 @@ li {
   align-items: center;
   min-height: 100%;
 }
+
 #sign-inner-container button {
   margin-top: 22px;
 }
@@ -211,7 +107,6 @@ canvas {
   justify-content: center;
   align-items: center;
   margin: 0;
-  /* border: 1px solid black; */
 }
 
 #stat-container p {

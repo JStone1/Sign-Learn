@@ -2,8 +2,13 @@ let handpose;
 let video;
 let myCanvas;
 let predictions = [];
+
 let isReady = false;
 let isMainScreen = false;
+let time = 30;
+let score = 0;
+let startTime = false;
+let signNumber = 0;
 
 // variables to store finger coordinates
 let indexFinger = [];
@@ -21,16 +26,10 @@ let baseOfRing = [];
 let baseOfMiddle = [];
 let baseOfIndex = [];
 
-let time = 30;
-let score = 0;
-let startTime = false;
-
-let signNumber = 0;
-
-let splashBtn = document.getElementById("splashBtn");
+let homeBtn = document.getElementById("homeBtn");
 let mainBtn = document.getElementById("mainBtn");
-
 let timeInterval = setInterval(decrementTime, 1000);
+
 function decrementTime() {
   if (startTime) {
     time -= 1;
@@ -40,38 +39,17 @@ function decrementTime() {
 
   if (time == 0) {
     clearInterval(timeInterval);
-    console.log("Times up");
+    document
+      .getElementById("stat-container")
+      .insertAdjacentHTML("beforebegin", pages.results);
   }
 }
 
-if (isMainScreen) {
-  startBtn.addEventListener("click", () => {
-    if (isReady) {
-      myCanvas.parent("canvas-container");
-      myCanvas.show();
-      document
-        .getElementById("sign-inner-container")
-        .classList.remove("hidden");
-      signNumber = 1;
-    }
-  });
-
-  hintBtn.addEventListener("click", () => {
-    document.getElementById("sign-img").classList.toggle("hidden");
-    if (hintBtn.innerHTML === "Hide Hint") {
-      hintBtn.innerHTML = "Show Hint";
-    } else {
-      hintBtn.innerHTML = "Hide Hint";
-    }
-  });
-}
-
+// button to move from the home screen to the main screen
 mainBtn.addEventListener("click", () => {
   isMainScreen = true;
-  console.log("Is main screen: ", isMainScreen);
-  console.log("Is ready: ", isReady);
   document.getElementById("main-container").innerHTML = pages.mainScreen; // replace the page content with new html
-  document.getElementById("splashBtn").classList.remove("hidden");
+  document.getElementById("homeBtn").classList.remove("hidden");
   // reinitialise the button element and re add the event listner
   let hintBtn = document.getElementById("hintBtn");
   hintBtn.addEventListener("click", () => {
@@ -83,6 +61,7 @@ mainBtn.addEventListener("click", () => {
     }
   });
 
+  // checks if on the main screen the sets up the position and visibility of the game when start button is clicked
   if (isMainScreen) {
     let startBtn = document.getElementById("startBtn");
     startBtn.addEventListener("click", () => {
@@ -101,24 +80,26 @@ mainBtn.addEventListener("click", () => {
   document.getElementById("sign-inner-container").classList.add("hidden");
 });
 
-splashBtn.addEventListener("click", () => {
+// button to move from main screen to home screen
+homeBtn.addEventListener("click", () => {
   isMainScreen = false;
-  console.log("Is main screen: ", isMainScreen);
+  clearInterval(timeInterval);
 
-  document.getElementById("main-container").innerHTML = pages.splashScreen;
+  // changes to home screen and resets stats
+  document.getElementById("main-container").innerHTML = pages.homeScreen;
   startTime = false;
   time = 30;
   score = 0;
 
-  document.getElementById("splashBtn").classList.add("hidden");
+  document.getElementById("homeBtn").classList.add("hidden");
 
+  // creating new buttons with new listeners as old ones get destroyed when user changes page - talked about in dev doc
   let newMainBtn = document.getElementById("mainBtn");
   newMainBtn.addEventListener("click", () => {
     timeInterval = setInterval(decrementTime, 1000);
     isMainScreen = true;
-    console.log("Is main screen: ", isMainScreen);
-    document.getElementById("main-container").innerHTML = pages.mainScreen; // replace the page content
-    document.getElementById("splashBtn").classList.remove("hidden");
+    document.getElementById("main-container").innerHTML = pages.mainScreen;
+    document.getElementById("homeBtn").classList.remove("hidden");
 
     let newHintBtn = document.getElementById("hintBtn");
     newHintBtn.addEventListener("click", () => {
@@ -148,14 +129,13 @@ splashBtn.addEventListener("click", () => {
   // myCanvas.hide();
 });
 
+// p5 setup function that creates the canvas and video when program is run
+// some of following code is adapted from ml5 handpose model starter code: https://learn.ml5js.org/#/reference/handpose
 function setup() {
   myCanvas = createCanvas(640, 480);
 
   video = createCapture(VIDEO);
   video.size(width, height);
-
-  console.log(myCanvas);
-
   handpose = ml5.handpose(video, modelReady);
 
   // This sets up an event that fills the global variable "predictions"
@@ -180,22 +160,15 @@ function setup() {
           thumb = results[0].annotations.thumb;
           palm = results[0].annotations.palmBase;
 
-          // variables for letter B
+          // variables for letters
           tipOfThumb = results[0].annotations.thumb[3];
           baseOfPinky = results[0].annotations.pinky[0];
-
-          // variables for letter Y
           tipOfIndexFinger = results[0].annotations.indexFinger[3];
           tipOfMiddleFinger = results[0].annotations.middleFinger[3];
           tipOfRingFinger = results[0].annotations.ringFinger[3];
           baseOfIndex = results[0].annotations.indexFinger[0];
           baseOfMiddle = results[0].annotations.middleFinger[0];
           baseOfRing = results[0].annotations.ringFinger[0];
-          // middleFinger = results[0].annotations.middleFinger;
-          // pinkyFinger = results[0].annotations.pinky;
-          // ringFinger = results[0].annotations.ringFinger;
-          // thumb = results[0].annotations.thumb;
-          // palm = results[0].annotations.palmBase;
 
           // output finger data for debugging
           // console.log("Index finger: ", indexFinger);
@@ -222,6 +195,7 @@ function setup() {
   myCanvas.hide();
 }
 
+// page visibiltiy api that changes document title
 document.addEventListener("visibilitychange", function () {
   if (document.hidden) {
     document.title = "Sign Learn - Come back!";
@@ -234,7 +208,6 @@ document.addEventListener("visibilitychange", function () {
 function modelReady() {
   isReady = true;
   console.log("Model ready!");
-  console.log(isReady);
 }
 
 function draw() {
@@ -242,10 +215,10 @@ function draw() {
 
   // We can call both functions to draw all keypoints and the skeletons
   drawKeypoints();
-  // drawTipOfIndex();
 }
 
 // A function to draw ellipses over the detected keypoints
+// some code adapted from handpose example: https://editor.p5js.org/ml5/sketches/Handpose_Webcam
 function drawKeypoints() {
   const circleOfThumb = tipOfThumb;
   const circleOfPinky = baseOfPinky;
@@ -256,21 +229,27 @@ function drawKeypoints() {
   const circleOfIndex = tipOfIndexFinger;
   const circleBaseOfIndex = baseOfIndex;
 
-  switch (signNumber) {
+  switch (
+    signNumber // checks which letter the user is currently on
+  ) {
     case 1:
       let distance = dist(
+        // dist function checks the distance between x and y coordinates from two points on the canvas
         baseOfPinky[0],
         baseOfPinky[1],
         tipOfThumb[0],
         tipOfThumb[1]
       );
+
+      // sets circles to red
       fill(255, 0, 0);
       noStroke();
       ellipse(circleOfThumb[0], circleOfThumb[1], 7, 7);
-
       fill(255, 0, 0);
       noStroke();
       ellipse(circleOfPinky[0], circleOfPinky[1], 7, 7);
+
+      // if user is making correct sign then turns circles to green and runs the next function
       if (distance < 50) {
         fill(0, 255, 0);
         noStroke();
@@ -278,9 +257,9 @@ function drawKeypoints() {
         fill(0, 255, 0);
         noStroke();
         ellipse(circleOfThumb[0], circleOfThumb[1], 7, 7);
+
         setTimeout(letterB, 3000);
       }
-
       break;
     case 2:
       let thumbDistance = dist(
@@ -289,13 +268,14 @@ function drawKeypoints() {
         tipOfThumb[0],
         tipOfThumb[1]
       );
-      fill(255, 0, 0);
-      noStroke();
-      ellipse(circleOfThumb[0], circleOfThumb[1], 7, 7);
 
       fill(255, 0, 0);
       noStroke();
+      ellipse(circleOfThumb[0], circleOfThumb[1], 7, 7);
+      fill(255, 0, 0);
+      noStroke();
       ellipse(circleOfIndex[0], circleOfIndex[1], 7, 7);
+
       if (thumbDistance > 50 && thumbDistance < 90) {
         fill(0, 255, 0);
         noStroke();
@@ -304,6 +284,7 @@ function drawKeypoints() {
         fill(0, 255, 0);
         noStroke();
         ellipse(circleOfIndex[0], circleOfIndex[1], 7, 7);
+
         setTimeout(letterC, 3000);
       }
       break;
@@ -311,11 +292,9 @@ function drawKeypoints() {
       fill(255, 0, 0);
       noStroke();
       ellipse(circleOfRing[0], circleOfRing[1], 7, 7);
-
       fill(255, 0, 0);
       noStroke();
       ellipse(circleOfMiddle[0], circleOfMiddle[1], 7, 7);
-
       fill(255, 0, 0);
       noStroke();
       ellipse(circleOfIndex[0], circleOfIndex[1], 7, 7);
@@ -354,11 +333,11 @@ function drawKeypoints() {
         fill(0, 255, 0);
         noStroke();
         ellipse(circleOfIndex[0], circleOfIndex[1], 7, 7);
+
         setTimeout(letterY, 3000);
       }
       break;
     case 4:
-      // document.getElementById("sign-inner-container").classList.add("hidden");
       document.getElementById("sign-inner-container").innerHTML =
         "All signs complete!";
       document.getElementById("sign-inner-container").style.textAlign =
@@ -369,60 +348,43 @@ function drawKeypoints() {
         for (let j = 0; j < prediction.landmarks.length; j += 1) {
           const keypoint = prediction.landmarks[j];
           fill(191, 219, 247);
-          // noStroke();
           ellipse(keypoint[0], keypoint[1], 7, 7);
         }
-        console.log("All signs complete - well done!");
       }
       break;
   }
 }
 
-// showResults();
-
-// function showResults() {
-//   document.getElementById("stat-container").innerHTML =
-//     "All signs done - Well done!";
-// }
-
 function letterB() {
   if (signNumber == 1) {
-    console.log("B correct!");
     signNumber++;
     score++;
     document.getElementById("score").innerHTML = score;
     document.getElementById("sign-img").src = "./images/Letter C.png";
     document.getElementById("sign-img").style.width = "90%";
     document.getElementById("current-sign").innerHTML = "Letter C";
-    console.log("Sign number: ", signNumber);
   }
 }
 
 function letterC() {
   if (signNumber == 2) {
-    console.log("C correct!");
     signNumber++;
     score++;
     document.getElementById("score").innerHTML = score;
     document.getElementById("sign-img").src = "./images/Letter Y.png";
     document.getElementById("sign-img").style.width = "90%";
     document.getElementById("current-sign").innerHTML = "Letter Y";
-
-    console.log("Sign number: ", signNumber);
   }
 }
 
 function letterY() {
   if (signNumber == 3) {
-    console.log("F correct!");
     signNumber++;
     score++;
     clearInterval(timeInterval);
     document.getElementById("score").innerHTML = score;
-    console.log(document.getElementById("stat-container"));
     document
       .getElementById("stat-container")
       .insertAdjacentHTML("beforebegin", pages.results);
-    console.log("Sign number: ", signNumber);
   }
 }

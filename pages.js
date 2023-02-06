@@ -1,5 +1,5 @@
 let pages = {
-  splashScreen: `
+  homeScreen: `
   <div
   class="row"
   style="background-color: #bfdbf7; border: 1px solid #022b3a"
@@ -7,12 +7,12 @@ let pages = {
   <div class="ten columns">
     <h2>What is it?</h2>
     <p>
-      This is a learning tool developed to help people practice sign
-      language.
+    Sign learn is a learning tool prototype developed to help people
+    practice sign language.
     </p>
   </div>
   <div class="two columns">
-    <img class="icon" src="/images/online-learning.png" />
+    <img class="icon" src="./images/online-learning.png" />
   </div>
 </div>
 
@@ -28,7 +28,7 @@ let pages = {
     </p>
   </div>
   <div class="two columns">
-    <img class="icon" src="/images/learning.png" />
+    <img class="icon" src="./images/learning.png" />
   </div>
 </div>
 
@@ -41,7 +41,7 @@ let pages = {
     <p>Press the button below to go to the next screen!</p>
   </div>
   <div class="two columns">
-    <img class="icon" src="/images/webcam.png" />
+    <img class="icon" src="./images/webcam.png" />
   </div>
 </div>
 <div class="row">
@@ -68,11 +68,13 @@ let pages = {
       <h3>Instructions</h3>
       <ul>
         <li>
-          Hold your hand in the correct position to mimic the current
+          Hold your hand in front of the camera to mimic the current
           sign.
+        </li>        
+        <li>
+          If the circles are red, adjust your hand position until they are green.
         </li>
-        <li>Get as many correct signs before the time runs out.</li>
-        <li>Press start when you're ready!</li>
+        <li>Get as many correct signs before the time runs out. Press start when you're ready!</li>
       </ul>
       <button class="button-primary" id="startBtn">Start</button>
     </section>
@@ -86,7 +88,7 @@ let pages = {
     <section id="sign-section" class="info-section">
       <div id="sign-inner-container" class="hidden">
         <h3 id="current-sign">Letter B</h3>
-        <img id="sign-img" src="/images/Letter B.png" />
+        <img id="sign-img" src="./images/Letter B.png" />
         <button class="button-primary" id="hintBtn">Hide Hint</button>
       </div>
     </section>
