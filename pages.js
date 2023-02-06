@@ -7,7 +7,7 @@ let pages = {
   <div class="ten columns">
     <h2>What is it?</h2>
     <p>
-    Sign learn is a learning tool prototype developed to help people
+    Sign Learn is a learning tool prototype developed to help people
     practice sign language.
     </p>
   </div>
