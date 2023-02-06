@@ -1,9 +1,7 @@
 let pages = {
   homeScreen: `
   <div
-  class="row"
-  style="background-color: #bfdbf7; border: 1px solid #022b3a"
->
+  class="row info-section">
   <div class="ten columns">
     <h2>What is it?</h2>
     <p>
@@ -17,9 +15,7 @@ let pages = {
 </div>
 
 <div
-  class="row"
-  style="background-color: #bfdbf7; border: 1px solid #022b3a"
->
+  class="row info-section">
   <div class="ten columns">
     <h2>How to use it?</h2>
     <p>
@@ -33,9 +29,7 @@ let pages = {
 </div>
 
 <div
-  class="row"
-  style="background-color: #bfdbf7; border: 1px solid #022b3a"
->
+  class="row info-section">
   <div class="ten columns">
     <h2>Ready?</h2>
     <p>Press the button below to go to the next screen!</p>
